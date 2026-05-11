@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Registro de cuenta en Shoes Store">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="inicioRegistro.css">
+  <title>Registro — Shoes Store</title>
+</head>
+<body>
+
+  <main>
+    <div class="cardRegister">
+      <nav class="top-nav" aria-label="Navegación superior">
+        <a href="inicio.html" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Volver
+        </a>
+      </nav>
+
+      <a href="tienda.html" class="brand-tag">SHOES<span class="brand-dot">.</span>STORE</a>
+
+      <h1 class="text1">Crear una cuenta</h1>
+      <h2 class="text2">Únete a la plataforma de sneakers más premium</h2>
+      
+      <form action="inicio.html" method="get">
+        <div class="form">
+          <label for="name">Nombre completo</label>
+          <input id="name" type="text" placeholder="Ingresa tu nombre" required>
+        </div>
+        
+        <div class="form">
+          <label for="cedula">Cédula</label>
+          <input id="cedula" type="number" placeholder="Ingresa tu documento" required>
+        </div>
+        
+        <div class="form">
+          <label for="password">Contraseña</label>
+          <input id="password" type="password" placeholder="Crea una contraseña segura" required>
+        </div>
+        
+        <div class="form">
+          <label for="birthdate">Fecha de nacimiento</label>
+          <input id="birthdate" type="date" required>
+        </div>
+        
+        <button type="submit" class="btn2">Registrarse</button>
+      </form>
+      
+      <div class="auth-link">
+        <a href="inicio.html">¿Ya tienes una cuenta? Inicia sesión</a>
+      </div>
+      
+      <p class="footer">Asegúrate de ingresar datos reales para tu proceso de envío.</p>
+    </div>
+  </main>
+
+</body>
+</html>

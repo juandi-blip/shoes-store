@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shoes Store — Explora nuestro catálogo completo de sneakers y zapatillas deportivas para hombre, mujer y niños.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="tienda1.css">
+  <link rel="stylesheet" href="catalogo.css">
+  <title>Catálogo — Shoes Store</title>
+</head>
+<body>
+
+  <header class="site-header" id="site-header">
+    <div class="top-banner">
+      <p>Envío gratis en pedidos superiores a $200.000 COP&nbsp;&nbsp;|&nbsp;&nbsp;<a href="catalogo.html">Comprar ahora</a></p>
+    </div>
+
+    <nav class="shoes-nav" id="main-nav">
+      <div class="nav-container">
+        <a class="navbar-brand" href="tienda.html">SHOES<span class="brand-dot">.</span>STORE</a>
+        <ul class="nav-main" id="nav-main">
+          <li class="nav-main__item has-mega" data-mega="mujer">
+            <a class="nav-main__link" href="catalogo.html?genero=mujer">MUJER</a>
+          </li>
+          <li class="nav-main__item has-mega" data-mega="hombre">
+            <a class="nav-main__link" href="catalogo.html?genero=hombre">HOMBRE</a>
+          </li>
+          <li class="nav-main__item has-mega" data-mega="ninos">
+            <a class="nav-main__link" href="catalogo.html?genero=ninos">NIÑOS</a>
+          </li>
+          <li class="nav-main__item has-mega" data-mega="deporte">
+            <a class="nav-main__link" href="catalogo.html?proposito=deporte">DEPORTE</a>
+          </li>
+          <li class="nav-main__item">
+            <a class="nav-main__link nav-main__link--new" href="catalogo.html?novedad=true">NOVEDADES ✨</a>
+          </li>
+          <li class="nav-main__item">
+            <a class="nav-main__link nav-main__link--outlet" href="catalogo.html?outlet=true">OUTLET</a>
+          </li>
+        </ul>
+        <div class="nav-actions">
+          <button class="nav-action-btn" id="btn-search" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          <a class="nav-action-btn" href="perfil.html" aria-label="Mi cuenta">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </a>
+          <a class="nav-action-btn nav-action-btn--login" href="inicio.html">Iniciar sesión</a>
+        </div>
+        <button class="hamburger" id="hamburger-btn" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+          <span class="hamburger__line"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Women mega-menu -->
+    <div class="mega-menu" id="mega-mujer" aria-hidden="true">
+      <div class="mega-menu__inner">
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Lifestyle</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=mujer&subcategoria=originals">Originals / Classics</a></li>
+            <li><a href="catalogo.html?genero=mujer&subcategoria=casual">Casual / Streetwear</a></li>
+            <li><a href="catalogo.html?genero=mujer&proposito=lifestyle">Novedades Lifestyle</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Performance</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=mujer&proposito=running">Running</a></li>
+            <li><a href="catalogo.html?genero=mujer&proposito=basketball">Basketball</a></li>
+            <li><a href="catalogo.html?genero=mujer&proposito=entrenamiento">Entrenamiento / Gym</a></li>
+            <li><a href="catalogo.html?genero=mujer&proposito=futbol">Fútbol / Soccer</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Colecciones &amp; Destacados</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?novedad=true">Novedades</a></li>
+            <li><a href="catalogo.html?genero=mujer">Más Vendidos</a></li>
+            <li><a href="catalogo.html?outlet=true" class="mega-outlet">OUTLET</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__promo">
+          <img src="megamenu-promo.png" alt="Colección destacada mujer" loading="lazy">
+          <h5 class="mega-menu__promo-title">Nueva Colección Mujer</h5>
+          <p class="mega-menu__promo-sub">Primavera 2026</p>
+          <a href="catalogo.html?genero=mujer&novedad=true" class="mega-menu__promo-btn">VER MÁS</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Men mega-menu -->
+    <div class="mega-menu" id="mega-hombre" aria-hidden="true">
+      <div class="mega-menu__inner">
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Lifestyle</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=hombre&subcategoria=originals">Originals / Classics</a></li>
+            <li><a href="catalogo.html?genero=hombre&subcategoria=casual">Casual / Streetwear</a></li>
+            <li><a href="catalogo.html?genero=hombre&proposito=lifestyle">Novedades Lifestyle</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Performance</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=hombre&proposito=running">Running</a></li>
+            <li><a href="catalogo.html?genero=hombre&proposito=basketball">Basketball</a></li>
+            <li><a href="catalogo.html?genero=hombre&proposito=entrenamiento">Entrenamiento / Gym</a></li>
+            <li><a href="catalogo.html?genero=hombre&proposito=futbol">Fútbol / Soccer</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Colecciones &amp; Destacados</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?novedad=true">Novedades</a></li>
+            <li><a href="catalogo.html?genero=hombre">Más Vendidos</a></li>
+            <li><a href="catalogo.html?outlet=true" class="mega-outlet">OUTLET</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__promo">
+          <img src="megamenu-promo.png" alt="Colección destacada hombre" loading="lazy">
+          <h5 class="mega-menu__promo-title">Lanzamiento Exclusivo</h5>
+          <p class="mega-menu__promo-sub">Solo en Shoes Store</p>
+          <a href="catalogo.html?genero=hombre&novedad=true" class="mega-menu__promo-btn">VER MÁS</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kids mega-menu -->
+    <div class="mega-menu" id="mega-ninos" aria-hidden="true">
+      <div class="mega-menu__inner">
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Lifestyle</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=ninos&subcategoria=casual">Casual / Streetwear</a></li>
+            <li><a href="catalogo.html?genero=ninos&subcategoria=originals">Originals</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Performance</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=ninos&proposito=running">Running</a></li>
+            <li><a href="catalogo.html?genero=ninos&proposito=futbol">Fútbol</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Destacados</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?genero=ninos">Más Vendidos</a></li>
+            <li><a href="catalogo.html?outlet=true" class="mega-outlet">OUTLET</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__promo">
+          <img src="megamenu-promo.png" alt="Colección niños" loading="lazy">
+          <h5 class="mega-menu__promo-title">Back to School</h5>
+          <p class="mega-menu__promo-sub">Colección Infantil</p>
+          <a href="catalogo.html?genero=ninos" class="mega-menu__promo-btn">VER MÁS</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sports mega-menu -->
+    <div class="mega-menu" id="mega-deporte" aria-hidden="true">
+      <div class="mega-menu__inner mega-menu__inner--sport">
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Running</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?proposito=running">Ver todo Running</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Basketball</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?proposito=basketball">Ver todo Basketball</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Entrenamiento</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?proposito=entrenamiento">CrossFit / Gym</a></li>
+          </ul>
+        </div>
+        <div class="mega-menu__pillar">
+          <h4 class="mega-menu__pillar-title">Fútbol</h4>
+          <ul class="mega-menu__list">
+            <li><a href="catalogo.html?proposito=futbol">Ver todo Fútbol</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mega-overlay" id="mega-overlay"></div>
+
+    <!-- ===== MOBILE DRAWER ===== -->
+    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+      <div class="mobile-drawer__header">
+        <span class="mobile-drawer__title">Menú</span>
+        <button class="mobile-drawer__close" id="mobile-close" aria-label="Cerrar menú">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="mobile-drawer__body">
+        <ul class="mobile-nav">
+          <li class="mobile-nav__item mobile-nav__item--expandable">
+            <button class="mobile-nav__link" data-mobile-expand="m-mujer">MUJER <span class="mobile-nav__arrow">›</span></button>
+            <div class="mobile-subnav" id="m-mujer">
+              <h5 class="mobile-subnav__title">Lifestyle</h5>
+              <a href="catalogo.html?genero=mujer&subcategoria=originals">Originals / Classics</a>
+              <a href="catalogo.html?genero=mujer&subcategoria=casual">Casual / Streetwear</a>
+              <h5 class="mobile-subnav__title">Performance</h5>
+              <a href="catalogo.html?genero=mujer&proposito=running">Running</a>
+              <a href="catalogo.html?genero=mujer&proposito=basketball">Basketball</a>
+              <a href="catalogo.html?genero=mujer&proposito=entrenamiento">Entrenamiento / Gym</a>
+              <a href="catalogo.html?genero=mujer&proposito=futbol">Fútbol / Soccer</a>
+              <h5 class="mobile-subnav__title">Destacados</h5>
+              <a href="catalogo.html?novedad=true">Novedades</a>
+              <a href="catalogo.html?genero=mujer">Más Vendidos</a>
+              <a href="catalogo.html?outlet=true" class="mega-outlet">OUTLET</a>
+            </div>
+          </li>
+          <li class="mobile-nav__item mobile-nav__item--expandable">
+            <button class="mobile-nav__link" data-mobile-expand="m-hombre">HOMBRE <span class="mobile-nav__arrow">›</span></button>
+            <div class="mobile-subnav" id="m-hombre">
+              <h5 class="mobile-subnav__title">Lifestyle</h5>
+              <a href="catalogo.html?genero=hombre&subcategoria=originals">Originals / Classics</a>
+              <a href="catalogo.html?genero=hombre&subcategoria=casual">Casual / Streetwear</a>
+              <h5 class="mobile-subnav__title">Performance</h5>
+              <a href="catalogo.html?genero=hombre&proposito=running">Running</a>
+              <a href="catalogo.html?genero=hombre&proposito=basketball">Basketball</a>
+              <a href="catalogo.html?genero=hombre&proposito=entrenamiento">Entrenamiento / Gym</a>
+              <a href="catalogo.html?genero=hombre&proposito=futbol">Fútbol / Soccer</a>
+              <h5 class="mobile-subnav__title">Destacados</h5>
+              <a href="catalogo.html?novedad=true">Novedades</a>
+              <a href="catalogo.html?genero=hombre">Más Vendidos</a>
+              <a href="catalogo.html?outlet=true" class="mega-outlet">OUTLET</a>
+            </div>
+          </li>
+          <li class="mobile-nav__item mobile-nav__item--expandable">
+            <button class="mobile-nav__link" data-mobile-expand="m-ninos">NIÑOS <span class="mobile-nav__arrow">›</span></button>
+            <div class="mobile-subnav" id="m-ninos">
+              <a href="catalogo.html?genero=ninos&subcategoria=casual">Casual</a>
+              <a href="catalogo.html?genero=ninos&proposito=running">Running</a>
+              <a href="catalogo.html?genero=ninos&proposito=futbol">Fútbol</a>
+              <a href="catalogo.html?genero=ninos">Más Vendidos</a>
+              <a href="catalogo.html?outlet=true" class="mega-outlet">OUTLET</a>
+            </div>
+          </li>
+          <li class="mobile-nav__item mobile-nav__item--expandable">
+            <button class="mobile-nav__link" data-mobile-expand="m-deporte">DEPORTE <span class="mobile-nav__arrow">›</span></button>
+            <div class="mobile-subnav" id="m-deporte">
+              <a href="catalogo.html?proposito=running">Running</a>
+              <a href="catalogo.html?proposito=basketball">Basketball</a>
+              <a href="catalogo.html?proposito=entrenamiento">CrossFit / Gym</a>
+              <a href="catalogo.html?proposito=futbol">Fútbol</a>
+            </div>
+          </li>
+          <li class="mobile-nav__item">
+            <a class="mobile-nav__link mobile-nav__link--new" href="catalogo.html?novedad=true">NOVEDADES ✨</a>
+          </li>
+          <li class="mobile-nav__item">
+            <a class="mobile-nav__link mobile-nav__link--outlet" href="catalogo.html?outlet=true">OUTLET</a>
+          </li>
+        </ul>
+        <div class="mobile-drawer__footer">
+          <a href="inicio.html" class="mobile-drawer__login">Iniciar sesión</a>
+          <a href="perfil.html" class="mobile-drawer__profile">Mi perfil</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== BREADCRUMB ===== -->
+    <nav class="catalog-breadcrumb" aria-label="Breadcrumb">
+      <a href="tienda.html">Inicio</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="catalogo.html">Catálogo</a>
+      <span id="breadcrumb-trail"></span>
+    </nav>
+
+    <!-- Filter overlay for mobile -->
+    <div class="filter-overlay" id="filter-overlay"></div>
+
+    <div class="catalog-page">
+      <!-- ===== SIDEBAR FILTERS ===== -->
+      <aside class="catalog-sidebar" id="catalog-sidebar">
+        <button class="sidebar-close-btn" id="sidebar-close" aria-label="Cerrar filtros" style="display:none;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+
+        <!-- Gender -->
+        <div class="sidebar-section">
+          <h4 class="sidebar-title">Género</h4>
+          <label class="filter-check"><input type="checkbox" data-filter-gender value="hombre"> Hombre</label>
+          <label class="filter-check"><input type="checkbox" data-filter-gender value="mujer"> Mujer</label>
+          <label class="filter-check"><input type="checkbox" data-filter-gender value="nino"> Niños</label>
+        </div>
+
+        <!-- Price -->
+        <div class="sidebar-section">
+          <h4 class="sidebar-title">Precio</h4>
+          <div class="price-range-wrap">
+            <div class="price-display">
+              <span id="price-min-label">$0</span>
+              <span id="price-max-label">$300</span>
+            </div>
+            <input type="range" class="price-range" id="price-range" min="0" max="300" value="300" step="5">
+          </div>
+        </div>
+
+        <!-- Category / Purpose -->
+        <div class="sidebar-section">
+          <h4 class="sidebar-title">Categoría</h4>
+          <label class="filter-check"><input type="checkbox" data-filter-category value="lifestyle"> Lifestyle</label>
+          <label class="filter-check"><input type="checkbox" data-filter-category value="running"> Running</label>
+          <label class="filter-check"><input type="checkbox" data-filter-category value="basketball"> Basketball</label>
+          <label class="filter-check"><input type="checkbox" data-filter-category value="entrenamiento"> Entrenamiento</label>
+          <label class="filter-check"><input type="checkbox" data-filter-category value="futbol"> Fútbol</label>
+        </div>
+
+        <!-- Outlet toggle -->
+        <div class="sidebar-section">
+          <div class="toggle-row">
+            <span class="toggle-label toggle-label--outlet">Solo Outlet</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="filter-outlet">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- New arrivals toggle -->
+        <div class="sidebar-section">
+          <div class="toggle-row">
+            <span class="toggle-label">Solo Novedades</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="filter-novedad">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <button class="btn-clear-filters" id="btn-clear-filters">Limpiar filtros</button>
+      </aside>
+
+      <!-- ===== MAIN CONTENT ===== -->
+      <section class="catalog-main">
+        <div class="catalog-header">
+          <div class="catalog-title-block">
+            <h1 class="catalog-title" id="catalog-title">Catálogo</h1>
+            <span class="catalog-count" id="catalog-count">0 productos</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+            <button class="mobile-filter-toggle" id="mobile-filter-btn" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+              Filtros
+            </button>
+            <div class="sort-wrap">
+              <span class="sort-label">Ordenar por</span>
+              <select class="sort-select" id="sort-select">
+                <option value="relevancia">Relevancia</option>
+                <option value="precio-asc">Precio: menor a mayor</option>
+                <option value="precio-desc">Precio: mayor a menor</option>
+                <option value="nombre">Nombre A-Z</option>
+                <option value="novedades">Novedades primero</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active filter tags -->
+        <div class="active-filters" id="active-filters"></div>
+
+        <!-- Product grid -->
+        <div class="catalog-grid" id="catalog-grid">
+          <!-- JS renders cards here -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">SHOES<span class="brand-dot">.</span>STORE</p>
+        <p class="footer-tagline">Las mejores sneakers, un solo lugar.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Enlaces</h4>
+        <ul class="footer-links">
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="inicio.html">Iniciar sesión</a></li>
+          <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Contacto</h4>
+        <p class="footer-contact">contacto@shoes.store</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; 2026 Shoes Store. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/tienda.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
