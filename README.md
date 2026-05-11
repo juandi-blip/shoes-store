@@ -37,11 +37,11 @@ python -m http.server 8000
 The hero video (`hero.mp4`) is sourced from Pexels. If you want to use a local copy:
 1. Download from [Pexels](https://www.pexels.com/search/sneakers/)
 2. Place in root folder as `hero.mp4`
-3. Or update `tienda.html` with a CDN link
+3. Or update `index.html` with a CDN link
 
 ## File Structure
 shoes-store/
-├── tienda.html              # Main store page
+├── index.html               # Main store page
 ├── catalogo.html            # Product listing
 ├── producto-detalle.html    # Product detail
 ├── inicio.html              # Home page

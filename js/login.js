@@ -56,6 +56,6 @@
     // Save session and redirect
     sessionStorage.setItem('shoesStore_loggedIn', 'true');
     sessionStorage.setItem('shoesStore_user', user);
-    window.location.href = 'tienda.html';
+    window.location.href = 'index.html';
   });
 })();

@@ -1,0 +1,17 @@
+# ---- API keys (NUNCA subir) ----
+js/config.js
+
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.swo
+
+# ---- Archivos de agentes/tools ----
+.agents/
+.playwright-mcp/
+
+# ---- Media pesada ----
+*.mp4
+*.avif
