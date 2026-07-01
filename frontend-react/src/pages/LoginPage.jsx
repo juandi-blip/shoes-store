@@ -23,7 +23,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="auth-page">
+    <main>
       <form className="card" id="login-form" onSubmit={manejarEnvio}>
         <h1>Iniciar sesión</h1>
         <label htmlFor="user">Usuario</label>
@@ -31,8 +31,8 @@ export default function LoginPage() {
         <label htmlFor="password">Contraseña</label>
         <input id="password" type="password" value={clave} onChange={(e) => { setClave(e.target.value); setError('') }} required />
         {error && <p className="login-error visible">{error}</p>}
-        <button type="submit">Entrar</button>
-        <p>¿No tienes cuenta? <Link to="/registro">Regístrate</Link></p>
+        <button type="submit" className="btn1">Iniciar sesión</button>
+        <p className="auth-link">¿No tienes cuenta? <Link to="/registro">Regístrate</Link></p>
       </form>
     </main>
   )

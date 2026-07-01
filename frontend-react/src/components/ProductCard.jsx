@@ -9,25 +9,41 @@ function formatearPrecio(precio) {
   return '$' + valor.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })
 }
 
+function obtenerEtiquetaBadge(producto) {
+  if (producto.outlet) return 'Outlet'
+  if (producto.novedad) return 'Nuevo'
+  return null
+}
+
 /**
  * Tarjeta individual de producto usada en grids de catálogo y home.
+ * Reutiliza las clases .product-card / .card-* definidas en tienda1.css.
  * @param {{producto: object}} props
  */
 export default function ProductCard({ producto }) {
+  const etiquetaBadge = obtenerEtiquetaBadge(producto)
+
   return (
     <Link to={`/producto/${producto.id}`} className="product-card">
-      {producto.novedad && <span className="product-badge product-badge--new">Nuevo</span>}
-      {producto.outlet && <span className="product-badge product-badge--outlet">Outlet</span>}
-      <img
-        src={producto.imagen || PLACEHOLDER_IMG}
-        alt={producto.nombre}
-        loading="lazy"
-        onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMG }}
-      />
-      <div className="product-card__info">
-        <p className="product-card__brand">{producto.marca}</p>
-        <h3 className="product-card__name">{producto.nombre}</h3>
-        <p className="product-card__price">{formatearPrecio(producto.precio)}</p>
+      {etiquetaBadge && <span className="card-badge">{etiquetaBadge}</span>}
+      <div className="card-image-wrap">
+        <img
+          src={producto.imagen || PLACEHOLDER_IMG}
+          alt={producto.nombre}
+          loading="lazy"
+          onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMG }}
+        />
+        <div className="card-overlay">
+          <button className="card-overlay-btn" type="button">Ver producto</button>
+        </div>
+      </div>
+      <div className="card-body">
+        <h3>{producto.nombre}</h3>
+        <p className="brand">{producto.marca}</p>
+        <div className="card-bottom">
+          <p className="colorway">{producto.colorway || ''}</p>
+          <span className="price">{formatearPrecio(producto.precio)}</span>
+        </div>
       </div>
     </Link>
   )

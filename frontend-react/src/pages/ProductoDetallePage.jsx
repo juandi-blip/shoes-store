@@ -45,15 +45,15 @@ export default function ProductoDetallePage() {
       </div>
       <div className="pd-info">
         <p className="pd-brand">{producto.marca}</p>
-        <h1 className="pd-name">{producto.nombre}</h1>
+        <h1 className="pd-title">{producto.nombre}</h1>
         <p className="pd-colorway">{producto.colorway}</p>
         <p className="pd-price">${producto.precio.toLocaleString('en-US')}</p>
 
-        <div className="pd-sizes">
+        <div className="size-grid">
           {producto.tallas.map((talla) => (
             <button
               key={talla}
-              className={`pd-size${tallaSeleccionada === talla ? ' pd-size--selected' : ''}`}
+              className={`size-btn${tallaSeleccionada === talla ? ' active' : ''}`}
               onClick={() => setTallaSeleccionada(talla)}
             >
               {talla}
@@ -61,12 +61,12 @@ export default function ProductoDetallePage() {
           ))}
         </div>
 
-        <button className="pd-add-btn" onClick={agregar}>Agregar</button>
+        <button className="btn-primary-full" onClick={agregar}>Agregar</button>
 
-        <div className="accordion">
-          <div className="accordion-item">
+        <div className="pd-accordion">
+          <div className="accordion-item active">
             <h3 className="accordion-header">Detalles del producto</h3>
-            <div className="accordion-body">
+            <div className="accordion-content">
               <p>Género: {producto.genero}</p>
               <p>Propósito: {producto.proposito}</p>
               <p>Subcategoría: {producto.subcategoria}</p>

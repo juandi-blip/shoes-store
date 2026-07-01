@@ -16,7 +16,7 @@ export default function RegistroPage() {
   }
 
   return (
-    <main className="auth-page">
+    <main>
       <form className="card" onSubmit={manejarEnvio}>
         <h1>Crear cuenta</h1>
         <label htmlFor="nombre">Nombre</label>
@@ -25,8 +25,8 @@ export default function RegistroPage() {
         <input id="correo" type="email" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
         <label htmlFor="clave">Contraseña</label>
         <input id="clave" type="password" value={clave} onChange={(e) => setClave(e.target.value)} required />
-        <button type="submit">Registrarme</button>
-        <p>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
+        <button type="submit" className="btn2">Registrarme</button>
+        <p className="auth-link">¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
       </form>
     </main>
   )

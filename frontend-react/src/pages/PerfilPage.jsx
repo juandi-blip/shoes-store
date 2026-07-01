@@ -12,10 +12,14 @@ export default function PerfilPage() {
   }
 
   return (
-    <main className="perfil-page">
-      <h1>Hola, {usuario}</h1>
-      <p>Este es tu perfil de Shoes.Store.</p>
-      <button onClick={cerrarSesion}>Cerrar sesión</button>
+    <main>
+      <div className="card">
+        <div className="profile-header">
+          <h1 className="text1">Hola, {usuario}</h1>
+          <h2 className="text2">Este es tu perfil de Shoes.Store.</h2>
+        </div>
+        <button type="button" className="btn1" onClick={cerrarSesion}>Cerrar sesión</button>
+      </div>
     </main>
   )
 }
