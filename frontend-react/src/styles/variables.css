@@ -1,0 +1,57 @@
+/**
+ * variables.css
+ * Shoes.Store — Global Design Tokens
+ * Centralized color palette, typography, and spacing variables.
+ */
+
+:root {
+  /* ── Colors ── */
+  --color-bg: #0d0d0d;
+  --color-bg-elevated: #141414;
+  --color-bg-card: #161616;
+  --color-surface: #1e1e1e;
+  --color-surface-hover: #252525;
+  --color-text: #ffffff;
+  --color-text-secondary: #b0b0b0;
+  --color-text-muted: #737373;
+  --color-text-inverse: #0d0d0d;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.16);
+  --color-overlay: rgba(0, 0, 0, 0.55);
+  --color-badge-bg: rgba(255, 255, 255, 0.1);
+
+  /* ── Typography ── */
+  --font-body: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+
+  --text-2xs: 0.625rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-hero: clamp(2.75rem, 7vw, 4.5rem);
+
+  /* ── Borders & Shadows ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --shadow-dropdown: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.18s var(--ease-smooth);
+  --transition-base: 0.3s var(--ease-smooth);
+  --transition-smooth: 0.4s var(--ease-out);
+
+  /* ── Layout ── */
+  --max-width: 1360px;
+  --grid-gap: 24px;
+}
