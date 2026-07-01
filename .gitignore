@@ -11,6 +11,7 @@ Thumbs.db
 # ---- Archivos de agentes/tools ----
 .agents/
 .playwright-mcp/
+.superpowers/
 
 # ---- Media pesada ----
 *.mp4
