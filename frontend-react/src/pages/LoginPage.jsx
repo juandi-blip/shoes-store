@@ -23,7 +23,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main>
+    <main className="auth-view">
       <form className="card" id="login-form" onSubmit={manejarEnvio}>
         <h1>Iniciar sesión</h1>
         <label htmlFor="user">Usuario</label>

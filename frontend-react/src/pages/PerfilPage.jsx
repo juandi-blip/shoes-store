@@ -12,7 +12,7 @@ export default function PerfilPage() {
   }
 
   return (
-    <main>
+    <main className="auth-view">
       <div className="card">
         <div className="profile-header">
           <h1 className="text1">Hola, {usuario}</h1>

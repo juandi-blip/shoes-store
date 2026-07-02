@@ -30,7 +30,13 @@ body {
   min-height: 100vh;
 }
 
-main {
+/*
+ * Nota (adaptación SPA): en el sitio original esta regla era `main { ... }`,
+ * pero en React todos los CSS se cargan juntos y ese selector afectaba al
+ * <main> de TODAS las páginas (rompía el layout del home/catálogo). Se acota
+ * a `.auth-view`, la clase que usan únicamente las páginas de login/registro/perfil.
+ */
+.auth-view {
   flex: 1;
   display: flex;
   justify-content: center;

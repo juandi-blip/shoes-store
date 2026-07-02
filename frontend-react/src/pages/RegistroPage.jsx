@@ -16,7 +16,7 @@ export default function RegistroPage() {
   }
 
   return (
-    <main>
+    <main className="auth-view">
       <form className="card" onSubmit={manejarEnvio}>
         <h1>Crear cuenta</h1>
         <label htmlFor="nombre">Nombre</label>
