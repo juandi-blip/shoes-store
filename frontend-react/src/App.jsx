@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { SessionProvider } from './context/SessionContext'
-import AnnouncementBar from './components/AnnouncementBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
@@ -19,7 +18,6 @@ function App() {
     <SessionProvider>
       <BrowserRouter>
         <div className="app">
-          <AnnouncementBar />
           <Navbar />
           <Routes>
             <Route path="/" element={<HomePage />} />
