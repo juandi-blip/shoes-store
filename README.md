@@ -1,84 +1,71 @@
-# Shoes.Store 👟
+# Shoes.Store — React frontend
 
-E-commerce platform for sneakers with a dark theme, mega-menu navigation, and local product database.
-
-> **Current implementation: React** — see [`frontend-react/`](./frontend-react). The
-> original vanilla HTML/CSS/JS files at the repo root are kept for reference
-> (and as the source of truth for visual/behavioral fidelity), but are no
-> longer the active app.
-
-## Features
-- **Responsive Design**: Desktop, tablet, and mobile
-- **Product Catalog**: Filtering by gender, category, price, and collections
-  (state synced to the URL)
-- **Product Details**: Full specifications, size availability, image zoom/lightbox
-- **Shopping Cart & Checkout (mock)**: Cart persisted locally, simulated payment
-  (card / PSE / cash on delivery) — no real payment processing
-- **Dark Theme**: Modern dark interface with a premium, animated product grid
-- **Local Data**: No external APIs — uses `productos.json`
+React port of the Shoes.Store sneaker storefront (originally vanilla HTML/CSS/JS,
+kept at the repo root for reference). Same visual identity and behavior,
+rebuilt as a single-page app.
 
 ## Stack
-- **Active app**: React 18 + Vite + react-router-dom 6, plain CSS (see `frontend-react/`)
-- **Legacy reference**: HTML5, CSS3, vanilla JavaScript (repo root)
-- Poppins font
-- Local `productos.json` database
+
+- **React 18** + **Vite** + **react-router-dom 6**
+- Plain CSS (no framework) — ported 1:1 from the original stylesheets, plus
+  an additive `glamour.css` layer for motion/visual polish
+- **pnpm** as the package manager
+- **Vitest** + **@testing-library/react** for tests
 
 ## Setup
 
-1. Clone the repo:
 ```bash
-git clone https://github.com/juandi-blip/shoes-store.git
-cd shoes-store
-```
-
-2. Run the React app (uses pnpm):
-```bash
-cd frontend-react
 pnpm install
-pnpm dev
+pnpm dev       # http://localhost:5173
 ```
 
-3. Visit `http://localhost:5173`
+Other scripts:
 
-See [`frontend-react/README.md`](./frontend-react/README.md) for the full
-project structure, scripts, and testing instructions.
+```bash
+pnpm test      # run the test suite (Vitest)
+pnpm build     # production build to dist/
+pnpm preview   # preview the production build locally
+```
 
-## Hero Video
-The hero video (`hero.mp4`) is sourced from Pexels. If you want to use a local copy:
-1. Download from [Pexels](https://www.pexels.com/search/sneakers/)
-2. Place in root folder as `hero.mp4`
-3. Or update `index.html` with a CDN link
+## Features
 
-## File Structure
-shoes-store/
-├── frontend-react/          # Active app (React + Vite) — see its own README
-├── index.html               # Legacy: main store page
-├── catalogo.html            # Legacy: product listing
-├── producto-detalle.html    # Legacy: product detail
-├── inicio.html              # Legacy: home page
-├── tienda1.css              # Legacy: store styles
-├── catalogo.css             # Legacy: catalog styles
-├── producto-detalle.css     # Legacy: product detail styles
-├── productos.json           # Product database (shared source data)
-├── js/
-│   ├── catalogo.js          # Legacy: filtering & sorting logic
-│   ├── tienda.js            # Legacy: navigation & mega-menu
-│   ├── producto-detalle.js  # Legacy: product detail logic
-│   ├── home.js              # Legacy: home page logic
-│   ├── login.js             # Legacy: login validation
-│   └── config.example.js    # Configuration template
-├── assets/brands/           # Brand SVG logos
-└── README.md                # This file
+- **Home / catalog / product detail** — faithful to the original design:
+  hero video, mega-menu navigation, scroll-reveal animations, size selector
+  with real availability, image zoom + lightbox
+- **Catalog filters synced to the URL** (genre, category, price, sort) — back/forward
+  and shareable links work as expected
+- **Cart & checkout (mock)** — cart persisted in `localStorage`, simulated
+  payment (card / PSE / cash on delivery). No real payment processing; see
+  the "Security notes" section below
+- **Auth (mock)** — login/register/profile with a client-side session, no backend
+- **Premium product cards** — cursor-following 3D tilt, price chip, staggered
+  entrance, all behind `prefers-reduced-motion`
 
-## Technologies
-- **Active frontend**: React 18, Vite, react-router-dom
-- **Legacy frontend**: HTML5, CSS3, JavaScript (ES6+), Bootstrap 5.3 / Tailwind CSS
-- **Typography**: Poppins (Google Fonts)
-- **Data**: JSON (local)
+## Project structure
+
+```
+src/
+├── components/     # Navbar, Footer, ProductCard, ProductGrid, Toast…
+├── context/        # SessionContext (auth mock), CartContext (cart)
+├── data/           # productos.json — local product catalog
+├── hooks/          # useProductos (filter/sort), useScrollReveal
+├── pages/          # HomePage, CatalogoPage, ProductoDetallePage,
+│                   # CarritoPage, PagoPage, LoginPage, RegistroPage, PerfilPage
+├── styles/         # ported CSS + carrito.css + glamour.css
+└── utils/          # imagenes.js (deterministic image fallback)
+```
+
+## Security notes
+
+The cart and checkout are demonstrations, not production code:
+
+- Cart contents are validated against the real product catalog on load
+  (unknown ids, invalid sizes, or out-of-range quantities are discarded) —
+  prices are always derived from the catalog, never trusted from storage.
+- Payment fields (card number, CVV, etc.) live only in component state:
+  they are never persisted or sent over the network, and the checkout page
+  displays an explicit "demo, don't enter real data" notice.
 
 ## Author
-Juan — Learning project for e-commerce fundamentals
 
----
-
-Made with ❤️ for sneaker lovers 👟
+Juan — Learning project for e-commerce fundamentals.

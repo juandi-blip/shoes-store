@@ -1,12 +1,32 @@
+# ---- Node / Vite build ----
+node_modules
+dist
+dist-ssr
+*.local
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
 # ---- API keys (NUNCA subir) ----
 js/config.js
 
 # ---- OS / Editor ----
 .DS_Store
 Thumbs.db
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+.idea
 *.swp
 *.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # ---- Archivos de agentes/tools ----
 .agents/
@@ -17,5 +37,5 @@ Thumbs.db
 # ---- Media pesada ----
 *.mp4
 *.avif
-# Excepción: asset pequeño usado por la UI de React (perfil de usuario)
-!frontend-react/public/*.avif
+# Excepción: asset pequeño usado por la UI (avatar de perfil)
+!public/*.avif
