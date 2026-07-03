@@ -39,7 +39,10 @@ function App() {
   return (
     <SessionProvider>
       <CartProvider>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        {/* basename = BASE_URL de Vite ("/shoes-store/" en build, "/" en dev):
+            las rutas del router coinciden con dónde vive realmente el sitio
+            (GitHub Pages sirve este repo bajo /shoes-store/, no en la raíz) */}
+        <BrowserRouter basename={import.meta.env.BASE_URL} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <div className="app">
             <Suspense fallback={null}>
               <Routes>
