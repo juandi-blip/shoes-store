@@ -1,5 +1,6 @@
 import { Link, Navigate } from 'react-router-dom'
 import { useSession } from '../context/SessionContext'
+import { assetUrl } from '../utils/assetUrl'
 
 /**
  * Página de perfil, solo accesible con sesión activa (mock).
@@ -26,7 +27,7 @@ export default function PerfilPage() {
         <Link to="/" className="brand-tag">SHOES<span className="brand-dot">.</span>STORE</Link>
 
         <div className="profile-header">
-          <img src="/icono-perfil.avif" alt="Avatar del usuario" className="profile-avatar" />
+          <img src={assetUrl('icono-perfil.avif')} alt="Avatar del usuario" className="profile-avatar" />
           <h1 className="text1">Mi Perfil</h1>
           <h2 className="text2">Gestiona tu información personal</h2>
         </div>

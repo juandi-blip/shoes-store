@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom'
 import { useProductos, filtrarYOrdenarProductos } from '../hooks/useProductos'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import ProductGrid from '../components/ProductGrid'
+import { assetUrl } from '../utils/assetUrl'
 
 const SIN_FILTROS = { generos: [], categorias: [], precioMax: 100000, soloOutlet: false, soloNovedad: false }
 
 /** Marcas mostradas en la barra "Nuestras marcas". */
 const MARCAS = [
-  { nombre: 'Nike', logo: '/assets/brands/nike.svg' },
-  { nombre: 'Adidas', logo: '/assets/brands/adidas.svg' },
-  { nombre: 'Jordan', logo: '/assets/brands/jordan.svg' },
-  { nombre: 'Puma', logo: '/assets/brands/puma.svg' },
-  { nombre: 'New Balance', logo: '/assets/brands/newbalance.svg' },
-  { nombre: 'Vans', logo: '/assets/brands/vans.svg' },
-  { nombre: 'Converse', logo: '/assets/brands/converse.svg' },
-  { nombre: 'Hoka', logo: '/assets/brands/hoka.svg' },
+  { nombre: 'Nike', logo: assetUrl('assets/brands/nike.svg') },
+  { nombre: 'Adidas', logo: assetUrl('assets/brands/adidas.svg') },
+  { nombre: 'Jordan', logo: assetUrl('assets/brands/jordan.svg') },
+  { nombre: 'Puma', logo: assetUrl('assets/brands/puma.svg') },
+  { nombre: 'New Balance', logo: assetUrl('assets/brands/newbalance.svg') },
+  { nombre: 'Vans', logo: assetUrl('assets/brands/vans.svg') },
+  { nombre: 'Converse', logo: assetUrl('assets/brands/converse.svg') },
+  { nombre: 'Hoka', logo: assetUrl('assets/brands/hoka.svg') },
 ]
 
 /** Categorías destacadas con su imagen de fondo. */
