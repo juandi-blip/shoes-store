@@ -175,6 +175,13 @@
   animation: marqueeMarcas 26s linear infinite;
 }
 
+/* Ancho fijo: sin esto el flex-item se dimensiona por su contenido (el
+   propio <img>), lo que además de verse inconsistente complica la carga
+   perezosa de imágenes dentro de un marquee. */
+.brands-marquee .brand-card {
+  flex: 0 0 140px;
+}
+
 .brands-marquee:hover .brands-grid {
   animation-play-state: paused;
 }

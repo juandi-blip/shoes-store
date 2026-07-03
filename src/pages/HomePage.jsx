@@ -86,7 +86,12 @@ export default function HomePage() {
               <div className="brands-grid" aria-hidden={esCopia || undefined} key={esCopia ? 'copia' : 'original'}>
                 {MARCAS.map((marca) => (
                   <div className="brand-card" key={marca.nombre}>
-                    <img src={marca.logo} alt={esCopia ? '' : marca.nombre} className="brand-logo-img" width="96" height="40" loading="lazy" />
+                    {/* Sin loading="lazy": dentro del marquee (glamour.css convierte .brands-grid
+                        a flex sin ancho fijo en .brand-card), el navegador no puede resolver el
+                        umbral "cerca del viewport" antes de cargar la imagen → nunca dispara el
+                        fetch y el logo queda en blanco para siempre. Son 16 SVG pequeños, carga
+                        inmediata sale gratis. */}
+                    <img src={marca.logo} alt={esCopia ? '' : marca.nombre} className="brand-logo-img" width="96" height="40" />
                   </div>
                 ))}
               </div>
