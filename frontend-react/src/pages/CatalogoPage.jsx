@@ -1,36 +1,61 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useProductos, filtrarYOrdenarProductos } from '../hooks/useProductos'
 import ProductGrid from '../components/ProductGrid'
 
 const PRECIO_MAX_GLOBAL = 300
 
+function parseGeneros(searchParams) {
+  const legado = searchParams.get('genero')
+  if (!legado) return []
+  return legado.split(',').map((g) => (g === 'ninos' ? 'nino' : g)).filter(Boolean)
+}
+
+function parseCategorias(searchParams) {
+  const set = new Set()
+  const categoria = searchParams.get('categoria')
+  if (categoria) categoria.split(',').filter(Boolean).forEach((c) => set.add(c))
+  const proposito = searchParams.get('proposito')
+  if (proposito) set.add(proposito)
+  const subcategoria = searchParams.get('subcategoria')
+  if (subcategoria) set.add(subcategoria)
+  return [...set]
+}
+
 /**
  * Página de catálogo con filtros de sidebar (género, categoría, precio,
- * outlet, novedad) y selector de orden, sincronizados con la URL.
+ * outlet, novedad) y selector de orden. El estado de filtros vive en la URL
+ * (query params), no en useState: así los enlaces del mega-menú y el botón
+ * "atrás" del navegador funcionan, y los filtros son compartibles/enlazables.
  */
 export default function CatalogoPage() {
   const { productos } = useProductos()
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const generoUrl = searchParams.get('genero')
-  const propositoUrl = searchParams.get('proposito')
-  const novedadUrl = searchParams.get('novedad') === 'true'
-  const outletUrl = searchParams.get('outlet') === 'true'
+  const generos = parseGeneros(searchParams)
+  const categorias = parseCategorias(searchParams)
+  const precioMax = Number(searchParams.get('precio')) || PRECIO_MAX_GLOBAL
+  const soloOutlet = searchParams.get('outlet') === 'true'
+  const soloNovedad = searchParams.get('novedad') === 'true'
+  const orden = searchParams.get('orden') || 'relevancia'
 
-  const [generos, setGeneros] = useState(() => (generoUrl ? [generoUrl === 'ninos' ? 'nino' : generoUrl] : []))
-  const [categorias, setCategorias] = useState(() => (propositoUrl ? [propositoUrl] : []))
-  const [precioMax, setPrecioMax] = useState(PRECIO_MAX_GLOBAL)
-  const [soloOutlet, setSoloOutlet] = useState(outletUrl)
-  const [soloNovedad, setSoloNovedad] = useState(novedadUrl)
-  const [orden, setOrden] = useState('relevancia')
-
-  useEffect(() => {
-    setGeneros(generoUrl ? [generoUrl === 'ninos' ? 'nino' : generoUrl] : [])
-    setCategorias(propositoUrl ? [propositoUrl] : [])
-    setSoloOutlet(outletUrl)
-    setSoloNovedad(novedadUrl)
-  }, [generoUrl, propositoUrl, outletUrl, novedadUrl])
+  /** Reescribe la URL a partir del estado de filtros dado (reemplaza claves heredadas del mega-menú). */
+  function actualizarFiltros(cambios) {
+    const siguiente = {
+      generos, categorias, precioMax, soloOutlet, soloNovedad, orden,
+      ...cambios,
+    }
+    const params = new URLSearchParams()
+    if (siguiente.generos.length > 0) {
+      params.set('genero', siguiente.generos.map((g) => (g === 'nino' ? 'ninos' : g)).join(','))
+    }
+    if (siguiente.categorias.length > 0) params.set('categoria', siguiente.categorias.join(','))
+    if (siguiente.precioMax !== PRECIO_MAX_GLOBAL) params.set('precio', String(siguiente.precioMax))
+    if (siguiente.soloOutlet) params.set('outlet', 'true')
+    if (siguiente.soloNovedad) params.set('novedad', 'true')
+    if (siguiente.orden !== 'relevancia') params.set('orden', siguiente.orden)
+    setSearchParams(params, { replace: true })
+  }
 
   const productosFiltrados = useMemo(
     () => filtrarYOrdenarProductos(productos, { generos, categorias, precioMax, soloOutlet, soloNovedad }, orden),
@@ -38,11 +63,11 @@ export default function CatalogoPage() {
   )
 
   function alternarGenero(valor) {
-    setGeneros((prev) => (prev.includes(valor) ? prev.filter((g) => g !== valor) : [...prev, valor]))
+    actualizarFiltros({ generos: generos.includes(valor) ? generos.filter((g) => g !== valor) : [...generos, valor] })
   }
 
   function alternarCategoria(valor) {
-    setCategorias((prev) => (prev.includes(valor) ? prev.filter((c) => c !== valor) : [...prev, valor]))
+    actualizarFiltros({ categorias: categorias.includes(valor) ? categorias.filter((c) => c !== valor) : [...categorias, valor] })
   }
 
   return (
@@ -73,11 +98,12 @@ export default function CatalogoPage() {
               <input
                 type="range"
                 className="price-range"
+                aria-label="Precio máximo"
                 min="0"
                 max={PRECIO_MAX_GLOBAL}
                 step="5"
                 value={precioMax}
-                onChange={(e) => setPrecioMax(Number(e.target.value))}
+                onChange={(e) => actualizarFiltros({ precioMax: Number(e.target.value) })}
               />
             </div>
           </div>
@@ -106,7 +132,7 @@ export default function CatalogoPage() {
             <div className="toggle-row">
               <span className="toggle-label toggle-label--outlet">Solo Outlet</span>
               <label className="toggle-switch">
-                <input type="checkbox" checked={soloOutlet} onChange={(e) => setSoloOutlet(e.target.checked)} />
+                <input type="checkbox" checked={soloOutlet} onChange={(e) => actualizarFiltros({ soloOutlet: e.target.checked })} />
                 <span className="toggle-slider"></span>
               </label>
             </div>
@@ -116,7 +142,7 @@ export default function CatalogoPage() {
             <div className="toggle-row">
               <span className="toggle-label">Solo Novedades</span>
               <label className="toggle-switch">
-                <input type="checkbox" checked={soloNovedad} onChange={(e) => setSoloNovedad(e.target.checked)} />
+                <input type="checkbox" checked={soloNovedad} onChange={(e) => actualizarFiltros({ soloNovedad: e.target.checked })} />
                 <span className="toggle-slider"></span>
               </label>
             </div>
@@ -128,8 +154,9 @@ export default function CatalogoPage() {
             <span className="catalog-count">{productosFiltrados.length} productos</span>
             <select
               className="sort-select"
+              aria-label="Ordenar por"
               value={orden}
-              onChange={(e) => setOrden(e.target.value)}
+              onChange={(e) => actualizarFiltros({ orden: e.target.value })}
             >
               <option value="relevancia">Relevancia</option>
               <option value="precio-asc">Precio: menor a mayor</option>

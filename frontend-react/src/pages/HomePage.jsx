@@ -54,13 +54,19 @@ export default function HomePage() {
       {/* ===== HERO ===== */}
       <section className="hero homepage-hero" aria-label="Banner principal">
         <div className="hero__image-wrap">
+          {/* Rendición SD directa (~1.9 MB) en vez del download UHD (~26 MB): mismo video, 93% menos peso */}
           <video autoPlay muted loop playsInline className="hero__video">
-            <source src="https://www.pexels.com/download/video/8520620/" type="video/mp4" />
+            <source src="https://videos.pexels.com/video-files/8520620/8520620-sd_960_394_25fps.mp4" type="video/mp4" />
           </video>
           <div className="hero__overlay"></div>
         </div>
         <div className="hero__content fade-in">
-          <h1 className="hero__title">Eleva tu estilo</h1>
+          {/* Cada palabra se revela desde su máscara con retardo escalonado (glamour.css) */}
+          <h1 className="hero__title">
+            <span className="hero-word"><span>Eleva</span></span>{' '}
+            <span className="hero-word"><span>tu</span></span>{' '}
+            <span className="hero-word"><span>estilo</span></span>
+          </h1>
           <p className="hero__subtitle">Las sneakers más exclusivas del momento. Rendimiento y diseño en cada paso.</p>
           <div className="hero__actions">
             <a href="#lo-mas-vendido" className="btn-primary">COMPRAR AHORA</a>
@@ -73,10 +79,15 @@ export default function HomePage() {
       <section className="brands-section" aria-label="Nuestras Marcas">
         <div className="brands-grid-container">
           <p className="brands-label">NUESTRAS MARCAS</p>
-          <div className="brands-grid">
-            {MARCAS.map((marca) => (
-              <div className="brand-card" key={marca.nombre}>
-                <img src={marca.logo} alt={marca.nombre} className="brand-logo-img" />
+          {/* Marquee infinito: dos copias del set; la segunda es decorativa (aria-hidden) */}
+          <div className="brands-marquee">
+            {[false, true].map((esCopia) => (
+              <div className="brands-grid" aria-hidden={esCopia || undefined} key={esCopia ? 'copia' : 'original'}>
+                {MARCAS.map((marca) => (
+                  <div className="brand-card" key={marca.nombre}>
+                    <img src={marca.logo} alt={esCopia ? '' : marca.nombre} className="brand-logo-img" width="96" height="40" loading="lazy" />
+                  </div>
+                ))}
               </div>
             ))}
           </div>

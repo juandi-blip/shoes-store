@@ -1,0 +1,265 @@
+/**
+ * glamour.css — Capa de elevación visual (SENA GA7-220501096-AA4-EV03)
+ *
+ * Capa ADITIVA sobre los estilos originales del sitio (tienda1/catalogo/
+ * producto-detalle/inicioRegistro.css): no reemplaza la estructura de la
+ * evidencia, la eleva. Contiene:
+ *   1. Corrección de estilos de enlace filtrados a las cards (bug visual)
+ *   2. Rediseño de la info de la card de producto (eyebrow de marca,
+ *      precio en chip, números tabulares)
+ *   3. Firma visual "vitrina 3D": tilt que sigue el cursor + barrido de
+ *      brillo (sheen) sobre la imagen, como una vitrina de exhibición
+ *   4. Entrada escalonada de cards (stagger)
+ *   5. Marquee infinito de marcas
+ *   6. Revelado del hero por palabras (máscara + stagger)
+ *   7. Microinteracciones de botones (sheen de luz)
+ *   8. Respeto total a prefers-reduced-motion
+ */
+
+/* ═══════════════ 1 · RESET DE ENLACE EN CARDS ═══════════════
+   ProductCard es un <Link>: sin esto, el subrayado y los colores de
+   anchor (:visited morado) contaminan nombre, colorway y precio. */
+.product-card,
+.product-card:visited {
+  text-decoration: none;
+  color: var(--color-text, #fff);
+}
+
+.product-card *,
+.product-card *:visited {
+  text-decoration: none;
+}
+
+/* ═══════════════ 2 · INFO DE LA CARD, REDISEÑADA ═══════════════ */
+.product-card .card-body {
+  padding: 1.1rem 1.15rem 1.2rem;
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Marca como eyebrow: pequeña, espaciada, arriba del nombre */
+.product-card .card-body .brand {
+  order: -1;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #737373);
+  margin: 0 0 0.35rem;
+}
+
+.product-card .card-body h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0 0 0.75rem;
+  color: var(--color-text, #fff);
+}
+
+.product-card .card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.product-card .colorway {
+  font-size: 0.72rem;
+  color: var(--color-text-muted, #737373);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* Precio como chip: protagonista, números tabulares */
+.product-card .price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text, #fff);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill, 999px);
+  padding: 0.32rem 0.8rem;
+  flex-shrink: 0;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.product-card:hover .price {
+  background: var(--color-text, #fff);
+  color: var(--color-text-inverse, #0d0d0d);
+  border-color: var(--color-text, #fff);
+}
+
+/* Precio del detalle también tabular */
+.pd-price {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════ 3 · FIRMA: VITRINA 3D ═══════════════
+   La card se inclina siguiendo el cursor (variables --rx/--ry escritas
+   por ProductCard.jsx) y un barrido de luz cruza la imagen, como el
+   reflejo del vidrio de una vitrina. Solo en punteros finos. */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .product-card {
+    transform-style: preserve-3d;
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.18s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+    will-change: transform;
+  }
+
+  /* Anula el translateY genérico del hover original: el tilt manda */
+  .product-card:hover {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-4px);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  /* La sneaker levita sobre su sombra dentro de la vitrina */
+  .product-card:hover .card-image-wrap img {
+    transform: scale(1.06) translateY(-6px);
+    filter: drop-shadow(0 18px 14px rgba(0, 0, 0, 0.35));
+  }
+
+  /* Barrido de brillo */
+  .card-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(
+      105deg,
+      transparent 42%,
+      rgba(255, 255, 255, 0.16) 50%,
+      transparent 58%
+    );
+    transform: translateX(-130%);
+    pointer-events: none;
+  }
+
+  .product-card:hover .card-image-wrap::after {
+    transition: transform 0.75s cubic-bezier(0.2, 0.6, 0.3, 1);
+    transform: translateX(130%);
+  }
+}
+
+/* ═══════════════ 4 · ENTRADA ESCALONADA DE CARDS ═══════════════ */
+.product-grid .product-card:nth-child(1),  .catalog-grid .product-card:nth-child(1)  { animation-delay: 0.03s; }
+.product-grid .product-card:nth-child(2),  .catalog-grid .product-card:nth-child(2)  { animation-delay: 0.09s; }
+.product-grid .product-card:nth-child(3),  .catalog-grid .product-card:nth-child(3)  { animation-delay: 0.15s; }
+.product-grid .product-card:nth-child(4),  .catalog-grid .product-card:nth-child(4)  { animation-delay: 0.21s; }
+.product-grid .product-card:nth-child(5),  .catalog-grid .product-card:nth-child(5)  { animation-delay: 0.27s; }
+.product-grid .product-card:nth-child(6),  .catalog-grid .product-card:nth-child(6)  { animation-delay: 0.33s; }
+.product-grid .product-card:nth-child(7),  .catalog-grid .product-card:nth-child(7)  { animation-delay: 0.39s; }
+.product-grid .product-card:nth-child(8),  .catalog-grid .product-card:nth-child(8)  { animation-delay: 0.45s; }
+.product-grid .product-card:nth-child(n+9), .catalog-grid .product-card:nth-child(n+9) { animation-delay: 0.5s; }
+
+/* ═══════════════ 5 · MARQUEE DE MARCAS ═══════════════
+   Cinta infinita: dos copias del set de logos desplazándose; al llegar
+   a -50% el loop reinicia sin salto. Pausa al hacer hover. */
+.brands-marquee {
+  overflow: hidden;
+  display: flex;
+  gap: 3.5rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.brands-marquee .brands-grid {
+  display: flex;
+  flex-shrink: 0;
+  gap: 3.5rem;
+  align-items: center;
+  animation: marqueeMarcas 26s linear infinite;
+}
+
+.brands-marquee:hover .brands-grid {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeMarcas {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - 3.5rem)); }
+}
+
+/* ═══════════════ 6 · HERO: REVELADO POR PALABRAS ═══════════════ */
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.hero-word > span {
+  display: inline-block;
+  transform: translateY(115%);
+  animation: heroPalabra 0.7s cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
+}
+
+.hero-word:nth-child(1) > span { animation-delay: 0.15s; }
+.hero-word:nth-child(2) > span { animation-delay: 0.27s; }
+.hero-word:nth-child(3) > span { animation-delay: 0.39s; }
+
+@keyframes heroPalabra {
+  to { transform: translateY(0); }
+}
+
+.hero__subtitle {
+  opacity: 0;
+  animation: heroSuave 0.8s ease 0.6s forwards;
+}
+
+.hero__actions {
+  opacity: 0;
+  animation: heroSuave 0.8s ease 0.8s forwards;
+}
+
+@keyframes heroSuave {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════ 7 · MICROINTERACCIONES DE BOTONES ═══════════════ */
+.btn-primary,
+.btn-primary-full,
+.btn-outline-dark {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after,
+.btn-primary-full::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(0, 0, 0, 0.12) 50%, transparent 60%);
+  transform: translateX(-130%);
+  pointer-events: none;
+}
+
+.btn-primary:hover::after,
+.btn-primary-full:hover::after {
+  transition: transform 0.6s ease;
+  transform: translateX(130%);
+}
+
+/* ═══════════════ 8 · REDUCED MOTION: TODO QUIETO ═══════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .brands-marquee .brands-grid {
+    animation: none;
+  }
+
+  .hero-word > span,
+  .hero__subtitle,
+  .hero__actions {
+    animation: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .product-grid .product-card,
+  .catalog-grid .product-card {
+    animation-delay: 0s;
+  }
+}

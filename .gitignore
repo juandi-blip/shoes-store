@@ -10,9 +10,12 @@ Thumbs.db
 
 # ---- Archivos de agentes/tools ----
 .agents/
+.claude/
 .playwright-mcp/
 .superpowers/
 
 # ---- Media pesada ----
 *.mp4
 *.avif
+# Excepción: asset pequeño usado por la UI de React (perfil de usuario)
+!frontend-react/public/*.avif

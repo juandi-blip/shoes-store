@@ -81,7 +81,7 @@ export default function Footer() {
             <span>Colombia</span>
           </div>
           <div className="footer-legal">
-            <span className="footer-copy">© 2026 Shoes Store. Todos los derechos reservados. Proyecto SENA GA7-220501096-AA4-EV03.</span>
+            <span className="footer-copy">© 2026 Shoes Store. Todos los derechos reservados.</span>
             <ul className="legal-links">
               <li><a href="#">Términos de Uso</a></li>
               <li><a href="#">Política de Privacidad</a></li>

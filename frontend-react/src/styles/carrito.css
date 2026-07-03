@@ -1,0 +1,440 @@
+/**
+ * carrito.css — Carrito de compras y página de pago (mock).
+ * Sigue el sistema de diseño oscuro del sitio (variables.css) y la capa
+ * de elevación visual de glamour.css.
+ */
+
+/* ═══════════════ LAYOUT COMPARTIDO ═══════════════ */
+.cart-page,
+.pay-page {
+  min-height: 60vh;
+}
+
+.cart-container,
+.pay-container {
+  max-width: var(--max-width, 1360px);
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+.cart-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 2rem;
+}
+
+.cart-title__count {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-muted, #737373);
+}
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ═══════════════ LÍNEAS DEL CARRITO ═══════════════ */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+}
+
+.cart-item__image {
+  width: 120px;
+  height: 120px;
+  background: var(--color-surface, #1e1e1e);
+  border-radius: var(--radius-md, 12px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+.cart-item__brand {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #737373);
+  margin: 0 0 0.2rem;
+}
+
+.cart-item__name {
+  color: var(--color-text, #fff);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.cart-item__name:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.cart-item__meta {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary, #b0b0b0);
+  margin: 0.25rem 0 0.75rem;
+}
+
+.cart-item__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.cart-item__remove {
+  background: none;
+  border: none;
+  color: var(--color-text-muted, #737373);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast, 0.2s);
+}
+
+.cart-item__remove:hover {
+  color: #ff6b6b;
+}
+
+.cart-item__price {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+/* ═══════════════ RESUMEN ═══════════════ */
+.cart-summary {
+  background: var(--color-bg-card, #161616);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem;
+  position: sticky;
+  top: 110px;
+}
+
+.cart-summary__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+}
+
+.cart-summary__rows {
+  margin: 0 0 1.25rem;
+}
+
+.cart-summary__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary, #b0b0b0);
+}
+
+.cart-summary__row dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.cart-summary__row--total {
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  margin-top: 0.5rem;
+  padding-top: 1rem;
+  color: var(--color-text, #fff);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.cart-summary__hint {
+  font-size: 0.75rem;
+  color: var(--color-text-muted, #737373);
+  margin: 0 0 1rem;
+}
+
+.cart-summary__continue {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--color-text-secondary, #b0b0b0);
+  font-size: 0.85rem;
+}
+
+/* ═══════════════ CARRITO VACÍO ═══════════════ */
+.cart-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--color-text-secondary, #b0b0b0);
+}
+
+.cart-empty__cta {
+  max-width: 280px;
+  margin: 1.5rem auto 0;
+  text-decoration: none;
+}
+
+/* ═══════════════ PÁGINA DE PAGO ═══════════════ */
+.pay-demo-banner {
+  background: rgba(255, 193, 7, 0.08);
+  border: 1px solid rgba(255, 193, 7, 0.25);
+  color: #ffd54f;
+  border-radius: var(--radius-md, 12px);
+  padding: 0.85rem 1.25rem;
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.pay-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.pay-method {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 1.1rem;
+  background: var(--color-surface, #1e1e1e);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-md, 12px);
+  cursor: pointer;
+  transition: border-color var(--transition-fast, 0.2s), background var(--transition-fast, 0.2s);
+}
+
+.pay-method:hover {
+  border-color: var(--color-border-hover, rgba(255, 255, 255, 0.16));
+}
+
+.pay-method.is-selected {
+  border-color: var(--color-text, #fff);
+  background: var(--color-surface-hover, #242424);
+}
+
+/* El radio queda accesible pero visualmente oculto: la card entera es el control */
+.pay-method input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pay-method:focus-within {
+  outline: 2px solid var(--color-text, #fff);
+  outline-offset: 2px;
+}
+
+.pay-method__title {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.pay-method__sub {
+  font-size: 0.72rem;
+  color: var(--color-text-muted, #737373);
+}
+
+.pay-fields {
+  margin-bottom: 1rem;
+}
+
+/* Reutiliza el estilo de inputs de auth (inicioRegistro.css) fuera de .card.
+   OJO con la especificidad: `.pay-form label` también alcanzaría a las cards
+   de método (que son <label>), por eso se re-afirma .pay-method más abajo. */
+.pay-form label {
+  display: block;
+  font-size: var(--text-xs, 0.75rem);
+  font-weight: 600;
+  color: var(--color-text-muted, #737373);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.pay-form input,
+.pay-form .pay-select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background-color: var(--color-surface, #1e1e1e);
+  border: 1px solid var(--color-border-hover, rgba(255, 255, 255, 0.16));
+  color: var(--color-text, #fff);
+  font-family: var(--font-body);
+  font-size: var(--text-sm, 0.8125rem);
+  border-radius: var(--radius-md, 12px);
+  outline: none;
+  transition: border-color var(--transition-fast, 0.2s), box-shadow var(--transition-fast, 0.2s);
+}
+
+.pay-form input:focus,
+.pay-form .pay-select:focus {
+  border-color: var(--color-text, #fff);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+}
+
+.pay-fields__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Gana a `.pay-form label`: la card de método vuelve a ser columna flex
+   con su propia tipografía (sin uppercase heredado) */
+.pay-form .pay-method {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--color-text, #fff);
+  font-size: inherit;
+  margin-bottom: 0;
+}
+
+.pay-fields__note {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #b0b0b0);
+}
+
+.pay-submit {
+  margin-top: 1.5rem;
+}
+
+.pay-summary-list {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pay-summary-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--color-text-secondary, #b0b0b0);
+}
+
+.pay-summary-list li span:last-child {
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* ═══════════════ CONFIRMACIÓN ═══════════════ */
+.pay-success {
+  max-width: 480px;
+  margin: 3rem auto;
+  text-align: center;
+  background: var(--color-bg-card, #161616);
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-lg, 16px);
+  padding: 3rem 2.5rem;
+}
+
+.pay-success__icon {
+  color: #4caf7d;
+  margin-bottom: 1rem;
+}
+
+.pay-success h1 {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+.pay-success p {
+  color: var(--color-text-secondary, #b0b0b0);
+  margin: 0 0 0.5rem;
+}
+
+.pay-success__note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted, #737373);
+}
+
+.pay-success__cta {
+  margin-top: 1.5rem;
+  text-decoration: none;
+}
+
+/* ═══════════════ BADGE DEL CARRITO EN EL HEADER ═══════════════ */
+.nav-cart-btn {
+  position: relative;
+}
+
+.nav-cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-text, #fff);
+  color: var(--color-text-inverse, #0d0d0d);
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+
+  .pay-methods {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .cart-container,
+  .pay-container {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .cart-item {
+    grid-template-columns: 90px 1fr;
+  }
+
+  .cart-item__image {
+    width: 90px;
+    height: 90px;
+  }
+
+  .cart-item__price {
+    grid-column: 2;
+    justify-self: end;
+  }
+}

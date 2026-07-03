@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { useSession } from '../context/SessionContext'
+import { useCart } from '../context/CartContext'
 import { MEGA_MENUS, NAV_MEGA } from './megaMenuData'
 
 const CLOSE_DELAY = 120 // ms, igual que js/tienda.js
@@ -13,6 +14,7 @@ const CLOSE_DELAY = 120 // ms, igual que js/tienda.js
  */
 export default function Navbar() {
   const { usuario } = useSession()
+  const { totalUnidades } = useCart()
   const [menuActivo, setMenuActivo] = useState(null) // mega-menú abierto (escritorio)
   const [drawerAbierto, setDrawerAbierto] = useState(false) // menú móvil
   const [expandido, setExpandido] = useState(null) // subnav móvil desplegado
@@ -96,6 +98,10 @@ export default function Navbar() {
             <button className="nav-action-btn" id="btn-search" aria-label="Buscar" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
             </button>
+            <Link className="nav-action-btn nav-cart-btn" to="/carrito" aria-label={`Carrito de compras${totalUnidades > 0 ? `, ${totalUnidades} artículos` : ''}`}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2l1.5 4H21l-2 8H8L6 2Z" /><path d="M7 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /><path d="M18 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /><path d="M8 14h11" /></svg>
+              {totalUnidades > 0 && <span className="nav-cart-badge" aria-hidden="true">{totalUnidades}</span>}
+            </Link>
             <Link className="nav-action-btn" to="/perfil" aria-label="Mi cuenta">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
             </Link>
