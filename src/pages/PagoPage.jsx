@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
-
-const TASA_COP = 4200
+import { TASA_COP, calcularEnvioCOP } from '../utils/pricing'
 
 const BANCOS_PSE = [
   'Bancolombia', 'Banco de Bogotá', 'Davivienda', 'BBVA Colombia',
@@ -33,9 +32,10 @@ export default function PagoPage() {
   const [banco, setBanco] = useState('')
   const [error, setError] = useState('')
   const [pedidoConfirmado, setPedidoConfirmado] = useState(null)
+  const [enviando, setEnviando] = useState(false)
 
   const totalCOP = totalPrecio * TASA_COP
-  const envioCOP = totalCOP >= 200000 || lineas.length === 0 ? 0 : 15000
+  const envioCOP = calcularEnvioCOP(totalCOP, lineas.length)
 
   if (lineas.length === 0 && !pedidoConfirmado) {
     return <Navigate to="/carrito" replace />
@@ -55,9 +55,12 @@ export default function PagoPage() {
 
   function pagar(e) {
     e.preventDefault()
+    if (enviando) return
+    setEnviando(true)
     const mensajeError = validar()
     if (mensajeError) {
       setError(mensajeError)
+      setEnviando(false)
       return
     }
     // Simulación: genera un número de pedido y limpia todo. Los datos de
@@ -219,7 +222,7 @@ export default function PagoPage() {
 
             <div className={`login-error${error ? ' visible' : ''}`} role="alert" aria-live="polite">{error}</div>
 
-            <button type="submit" className="btn-primary-full pay-submit">
+            <button type="submit" className="btn-primary-full pay-submit" disabled={enviando}>
               {metodo === 'contraentrega' ? 'Confirmar pedido' : `Pagar $${(totalCOP + envioCOP).toLocaleString('es-CO')} COP`}
             </button>
           </form>
