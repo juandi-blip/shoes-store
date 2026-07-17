@@ -3,6 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import { useProductos } from '../hooks/useProductos'
 import { useCart } from '../context/CartContext'
 import { imagenFallback } from '../utils/imagenes'
+import { useDocumentHead } from '../hooks/useDocumentHead'
+import { useJsonLd } from '../hooks/useJsonLd'
+import { TASA_COP } from '../utils/pricing'
 import Toast from '../components/Toast'
 
 // Debe coincidir con el breakpoint real que desactiva el layout de zoom
@@ -71,6 +74,33 @@ export default function ProductoDetallePage() {
   const { productos } = useProductos()
   const { agregarItem } = useCart()
   const producto = productos.find((p) => p.id === id)
+
+  useDocumentHead({
+    title: producto ? `${producto.nombre} — ${producto.marca} | Shoes Store` : 'Producto no encontrado | Shoes Store',
+    description: producto
+      ? `${producto.nombre} de ${producto.marca}${producto.colorway ? ` — ${producto.colorway}` : ''}. Cómpralo en Shoes Store.`
+      : 'No pudimos encontrar el producto que buscas.',
+    ogImage: producto ? producto.imagen : undefined,
+    canonicalPath: `producto/${id}`,
+  })
+
+  useJsonLd(
+    producto
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: producto.nombre,
+          brand: { '@type': 'Brand', name: producto.marca },
+          image: producto.imagen,
+          offers: {
+            '@type': 'Offer',
+            priceCurrency: 'COP',
+            price: String(Math.round(producto.precio * TASA_COP)),
+            availability: 'https://schema.org/InStock',
+          },
+        }
+      : null
+  )
 
   const [imgSrc, setImgSrc] = useState(producto ? producto.imagen || imagenFallback(producto) : imagenFallback())
   const [tallaSeleccionada, setTallaSeleccionada] = useState(null)
