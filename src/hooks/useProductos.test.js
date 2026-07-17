@@ -43,4 +43,28 @@ describe('filtrarYOrdenarProductos', () => {
     const result = filtrarYOrdenarProductos(sample, filtros, 'relevancia')
     expect(result[0].id).toBe('2')
   })
+
+  it('filtra por texto en el nombre (case-insensitive)', () => {
+    const filtros = { generos: [], categorias: [], precioMax: 300, soloOutlet: false, soloNovedad: false, busqueda: 'ULTRABOOST' }
+    const result = filtrarYOrdenarProductos(sample, filtros, 'relevancia')
+    expect(result.map(p => p.id)).toEqual(['2'])
+  })
+
+  it('filtra por texto en la marca (case-insensitive)', () => {
+    const filtros = { generos: [], categorias: [], precioMax: 300, soloOutlet: false, soloNovedad: false, busqueda: 'nike' }
+    const result = filtrarYOrdenarProductos(sample, filtros, 'relevancia').map(p => p.id).sort()
+    expect(result).toEqual(['1', '3'])
+  })
+
+  it('busqueda vacía no filtra nada', () => {
+    const filtros = { generos: [], categorias: [], precioMax: 300, soloOutlet: false, soloNovedad: false, busqueda: '' }
+    const result = filtrarYOrdenarProductos(sample, filtros, 'relevancia')
+    expect(result).toHaveLength(sample.length)
+  })
+
+  it('busqueda ausente (undefined) no filtra nada', () => {
+    const filtros = { generos: [], categorias: [], precioMax: 300, soloOutlet: false, soloNovedad: false }
+    const result = filtrarYOrdenarProductos(sample, filtros, 'relevancia')
+    expect(result).toHaveLength(sample.length)
+  })
 })
