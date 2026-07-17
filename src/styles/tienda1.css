@@ -221,6 +221,38 @@ img {
   border-color: var(--color-text);
 }
 
+.nav-search-wrap {
+  position: relative;
+}
+
+.nav-search {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 20;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-hover);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.25rem 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+}
+
+.nav-search__input {
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  width: 220px;
+  outline: none;
+}
+
+.nav-search__input::placeholder {
+  color: var(--color-text-secondary);
+}
+
 /* ── Hamburger Menu ── */
 .hamburger {
   display: none;

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { useSession } from '../context/SessionContext'
 import { useCart } from '../context/CartContext'
@@ -20,6 +20,10 @@ export default function Navbar() {
   const [drawerAbierto, setDrawerAbierto] = useState(false) // menú móvil
   const [expandido, setExpandido] = useState(null) // subnav móvil desplegado
   const timerRef = useRef(null)
+  const navigate = useNavigate()
+  const [busquedaAbierta, setBusquedaAbierta] = useState(false)
+  const [textoBusqueda, setTextoBusqueda] = useState('')
+  const inputBusquedaRef = useRef(null)
 
   const overlayVisible = menuActivo !== null || drawerAbierto
 
@@ -47,6 +51,21 @@ export default function Navbar() {
   function cerrarTodo() {
     setMenuActivo(null)
     cerrarDrawer()
+    setBusquedaAbierta(false)
+  }
+
+  /* ─── Búsqueda ─── */
+  function alternarBusqueda() {
+    setBusquedaAbierta((v) => !v)
+  }
+  function enviarBusqueda(e) {
+    e.preventDefault()
+    const texto = textoBusqueda.trim()
+    if (texto) {
+      navigate(`/catalogo?q=${encodeURIComponent(texto)}`)
+    }
+    setBusquedaAbierta(false)
+    setTextoBusqueda('')
   }
 
   // Cerrar con la tecla Escape, igual que el sitio original.
@@ -57,6 +76,11 @@ export default function Navbar() {
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [])
+
+  // Enfoca el input al abrir el panel de búsqueda.
+  useEffect(() => {
+    if (busquedaAbierta) inputBusquedaRef.current?.focus()
+  }, [busquedaAbierta])
 
   return (
     <header className="site-header" id="site-header">
@@ -96,9 +120,31 @@ export default function Navbar() {
 
           {/* Acciones (escritorio) */}
           <div className="nav-actions">
-            <button className="nav-action-btn" id="btn-search" aria-label="Buscar" type="button">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-            </button>
+            <div className="nav-search-wrap">
+              <button
+                className="nav-action-btn"
+                id="btn-search"
+                aria-label="Buscar"
+                aria-expanded={busquedaAbierta}
+                type="button"
+                onClick={alternarBusqueda}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+              </button>
+              {busquedaAbierta && (
+                <form className="nav-search" role="search" onSubmit={enviarBusqueda}>
+                  <input
+                    ref={inputBusquedaRef}
+                    type="search"
+                    className="nav-search__input"
+                    placeholder="Buscar productos…"
+                    aria-label="Buscar productos"
+                    value={textoBusqueda}
+                    onChange={(e) => setTextoBusqueda(e.target.value)}
+                  />
+                </form>
+              )}
+            </div>
             <Link className="nav-action-btn nav-cart-btn" to="/carrito" aria-label={`Carrito de compras${totalUnidades > 0 ? `, ${totalUnidades} artículos` : ''}`}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2l1.5 4H21l-2 8H8L6 2Z" /><path d="M7 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /><path d="M18 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" /><path d="M8 14h11" /></svg>
               {totalUnidades > 0 && <span className="nav-cart-badge" aria-hidden="true">{totalUnidades}</span>}
