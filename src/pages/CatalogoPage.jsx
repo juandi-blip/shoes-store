@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, Link } from 'react-router-dom'
 import { useProductos, filtrarYOrdenarProductos } from '../hooks/useProductos'
 import ProductGrid from '../components/ProductGrid'
 
@@ -41,6 +41,7 @@ export default function CatalogoPage() {
   const categoriaParam = searchParams.get('categoria')
   const propositoParam = searchParams.get('proposito')
   const subcategoriaParam = searchParams.get('subcategoria')
+  const qParam = searchParams.get('q') ?? ''
   const generos = useMemo(() => parseGeneros(searchParams), [generoParam])
   const categorias = useMemo(() => parseCategorias(searchParams), [categoriaParam, propositoParam, subcategoriaParam])
   const precioMax = Number(searchParams.get('precio')) || PRECIO_MAX_GLOBAL
@@ -67,8 +68,8 @@ export default function CatalogoPage() {
   }
 
   const productosFiltrados = useMemo(
-    () => filtrarYOrdenarProductos(productos, { generos, categorias, precioMax, soloOutlet, soloNovedad }, orden),
-    [productos, generos, categorias, precioMax, soloOutlet, soloNovedad, orden]
+    () => filtrarYOrdenarProductos(productos, { generos, categorias, precioMax, soloOutlet, soloNovedad, busqueda: qParam }, orden),
+    [productos, generos, categorias, precioMax, soloOutlet, soloNovedad, qParam, orden]
   )
 
   function alternarGenero(valor) {
@@ -159,6 +160,11 @@ export default function CatalogoPage() {
         </aside>
 
         <section className="catalog-main">
+          {qParam && (
+            <p className="catalog-search-info">
+              Resultados para «{qParam}» · <Link to="/catalogo">Quitar</Link>
+            </p>
+          )}
           <div className="catalog-toolbar">
             <span className="catalog-count">{productosFiltrados.length} productos</span>
             <select
