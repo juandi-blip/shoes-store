@@ -32,8 +32,17 @@ export default function CatalogoPage() {
   const { productos } = useProductos()
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const generos = parseGeneros(searchParams)
-  const categorias = parseCategorias(searchParams)
+  // Memoizados sobre los strings crudos de la URL (no sobre `searchParams`,
+  // que React Router entrega como instancia nueva en cada render): así
+  // `generos`/`categorias` solo cambian de referencia cuando el usuario
+  // realmente cambia esos filtros, y el useMemo de productosFiltrados de
+  // abajo deja de recalcular en cada render.
+  const generoParam = searchParams.get('genero')
+  const categoriaParam = searchParams.get('categoria')
+  const propositoParam = searchParams.get('proposito')
+  const subcategoriaParam = searchParams.get('subcategoria')
+  const generos = useMemo(() => parseGeneros(searchParams), [generoParam])
+  const categorias = useMemo(() => parseCategorias(searchParams), [categoriaParam, propositoParam, subcategoriaParam])
   const precioMax = Number(searchParams.get('precio')) || PRECIO_MAX_GLOBAL
   const soloOutlet = searchParams.get('outlet') === 'true'
   const soloNovedad = searchParams.get('novedad') === 'true'
