@@ -147,7 +147,7 @@ export default function ProductoDetallePage() {
   if (producto.proposito) colorwayParts.push(capitalizar(producto.proposito))
   if (producto.colorway) colorwayParts.push(`Colorway: ${producto.colorway}`)
 
-  const precioCOP = Math.round(producto.precio * 4200).toLocaleString('es-CO')
+  const precioCOP = Math.round(producto.precio * TASA_COP).toLocaleString('es-CO')
 
   function moverMouse(e) {
     if (!zoomActivo || !galleryRef.current) return
