@@ -75,3 +75,27 @@ describe('useCart — endurecimiento contra manipulación del storage', () => {
     expect(result.current.totalPrecio).toBe(p.precio)
   })
 })
+
+describe('useCart — estabilidad de referencia (memoización)', () => {
+  it('agregarItem, quitarItem y vaciarCarrito mantienen la misma identidad entre renders sin cambios', () => {
+    const { result, rerender } = renderHook(() => useCart(), { wrapper })
+    const agregarItemInicial = result.current.agregarItem
+    const quitarItemInicial = result.current.quitarItem
+    const vaciarCarritoInicial = result.current.vaciarCarrito
+
+    rerender()
+
+    expect(result.current.agregarItem).toBe(agregarItemInicial)
+    expect(result.current.quitarItem).toBe(quitarItemInicial)
+    expect(result.current.vaciarCarrito).toBe(vaciarCarritoInicial)
+  })
+
+  it('el value completo mantiene la misma identidad entre renders sin cambios en el carrito', () => {
+    const { result, rerender } = renderHook(() => useCart(), { wrapper })
+    const valueInicial = result.current
+
+    rerender()
+
+    expect(result.current).toBe(valueInicial)
+  })
+})

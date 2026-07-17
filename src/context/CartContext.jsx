@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import productosData from '../data/productos.json'
 
 /**
@@ -62,11 +62,11 @@ export function CartProvider({ children }) {
     }
   }, [items])
 
-  function agregarItem(id, talla, cantidad = 1) {
+  const agregarItem = useCallback((id, talla, cantidad = 1) => {
     setItems((previos) => sanearItems([...previos, { id, talla, cantidad }]))
-  }
+  }, [])
 
-  function actualizarCantidad(id, talla, cantidad) {
+  const actualizarCantidad = useCallback((id, talla, cantidad) => {
     setItems((previos) =>
       sanearItems(
         previos.map((item) =>
@@ -74,34 +74,41 @@ export function CartProvider({ children }) {
         )
       )
     )
-  }
+  }, [])
 
-  function quitarItem(id, talla) {
+  const quitarItem = useCallback((id, talla) => {
     setItems((previos) => previos.filter((item) => !(item.id === id && item.talla === talla)))
-  }
+  }, [])
 
-  function vaciarCarrito() {
+  const vaciarCarrito = useCallback(() => {
     setItems([])
-  }
+  }, [])
 
-  // Enriquecidos con datos del catálogo (precio SIEMPRE del dataset)
-  const lineas = items
-    .map((item) => {
-      const producto = productosData.find((p) => p.id === item.id)
-      return producto ? { ...item, producto, subtotal: producto.precio * item.cantidad } : null
-    })
-    .filter(Boolean)
+  // Enriquecidos con datos del catálogo (precio SIEMPRE del dataset).
+  // Memoizado sobre `items`: sin esto, `lineas` sería un array nuevo en
+  // cada render (aunque `items` no cambie), invalidando el useMemo de abajo.
+  const { lineas, totalUnidades, totalPrecio } = useMemo(() => {
+    const lineas = items
+      .map((item) => {
+        const producto = productosData.find((p) => p.id === item.id)
+        return producto ? { ...item, producto, subtotal: producto.precio * item.cantidad } : null
+      })
+      .filter(Boolean)
+    return {
+      lineas,
+      totalUnidades: lineas.reduce((acc, l) => acc + l.cantidad, 0),
+      totalPrecio: lineas.reduce((acc, l) => acc + l.subtotal, 0),
+    }
+  }, [items])
 
-  const totalUnidades = lineas.reduce((acc, l) => acc + l.cantidad, 0)
-  const totalPrecio = lineas.reduce((acc, l) => acc + l.subtotal, 0)
-
-  return (
-    <CartContext.Provider
-      value={{ lineas, totalUnidades, totalPrecio, agregarItem, actualizarCantidad, quitarItem, vaciarCarrito }}
-    >
-      {children}
-    </CartContext.Provider>
+  // El value solo cambia de referencia cuando `items` realmente cambia:
+  // las funciones son estables (useCallback) y los derivados también (useMemo).
+  const value = useMemo(
+    () => ({ lineas, totalUnidades, totalPrecio, agregarItem, actualizarCantidad, quitarItem, vaciarCarrito }),
+    [lineas, totalUnidades, totalPrecio, agregarItem, actualizarCantidad, quitarItem, vaciarCarrito]
   )
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }
 
 /** Hook de acceso al carrito. */
