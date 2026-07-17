@@ -1,9 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { imagenFallback } from '../utils/imagenes'
-
-const ENVIO_GRATIS_DESDE_COP = 200000
-const TASA_COP = 4200
+import { TASA_COP, ENVIO_GRATIS_DESDE_COP, calcularEnvioCOP } from '../utils/pricing'
 
 /**
  * Página del carrito de compras (mock): líneas con imagen, talla, cantidad
@@ -15,7 +13,7 @@ export default function CarritoPage() {
 
   const totalCOP = totalPrecio * TASA_COP
   const envioGratis = totalCOP >= ENVIO_GRATIS_DESDE_COP
-  const costoEnvioCOP = envioGratis || lineas.length === 0 ? 0 : 15000
+  const costoEnvioCOP = calcularEnvioCOP(totalCOP, lineas.length)
 
   if (lineas.length === 0) {
     return (
