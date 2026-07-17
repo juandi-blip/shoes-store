@@ -4,6 +4,7 @@ import { useProductos, filtrarYOrdenarProductos } from '../hooks/useProductos'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import ProductGrid from '../components/ProductGrid'
 import { assetUrl } from '../utils/assetUrl'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 
 const SIN_FILTROS = { generos: [], categorias: [], precioMax: 100000, soloOutlet: false, soloNovedad: false }
 
@@ -32,6 +33,12 @@ const CATEGORIAS = [
  * Reproduce la estructura y clases del index.html original.
  */
 export default function HomePage() {
+  useDocumentHead({
+    title: 'Shoes Store — Sneakers premium',
+    description: 'Shoes Store — Las sneakers más exclusivas del momento. Rendimiento y diseño en cada paso.',
+    canonicalPath: '',
+  })
+
   const { productos } = useProductos()
 
   const destacados = useMemo(

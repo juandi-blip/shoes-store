@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { useProductos, filtrarYOrdenarProductos } from '../hooks/useProductos'
+import { useDocumentHead } from '../hooks/useDocumentHead'
 import ProductGrid from '../components/ProductGrid'
 
 const PRECIO_MAX_GLOBAL = 300
@@ -42,6 +43,12 @@ export default function CatalogoPage() {
   const propositoParam = searchParams.get('proposito')
   const subcategoriaParam = searchParams.get('subcategoria')
   const qParam = searchParams.get('q') ?? ''
+  useDocumentHead({
+    title: qParam ? `Resultados para "${qParam}" — Catálogo | Shoes Store` : 'Catálogo | Shoes Store',
+    description:
+      'Explora nuestro catálogo completo de sneakers premium: hombre, mujer y niños, running, basketball, lifestyle y más.',
+    canonicalPath: 'catalogo',
+  })
   const generos = useMemo(() => parseGeneros(searchParams), [generoParam])
   const categorias = useMemo(() => parseCategorias(searchParams), [categoriaParam, propositoParam, subcategoriaParam])
   const precioMax = Number(searchParams.get('precio')) || PRECIO_MAX_GLOBAL
