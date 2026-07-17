@@ -106,6 +106,8 @@ export default function Navbar() {
                 className={`nav-main__item has-mega${menuActivo === item.id ? ' active' : ''}`}
                 onMouseEnter={() => abrirMega(item.id)}
                 onMouseLeave={cerrarMegaConDelay}
+                onFocus={() => abrirMega(item.id)}
+                onBlur={cerrarMegaConDelay}
               >
                 <Link className="nav-main__link" to={item.to}>{item.label}</Link>
               </li>
@@ -182,6 +184,8 @@ export default function Navbar() {
           aria-hidden={menuActivo !== id}
           onMouseEnter={cancelarCierre}
           onMouseLeave={cerrarMegaConDelay}
+          onFocus={cancelarCierre}
+          onBlur={cerrarMegaConDelay}
         >
           <div className={`mega-menu__inner${menu.sport ? ' mega-menu__inner--sport' : ''}`}>
             {menu.pillars.map((pillar) => (
