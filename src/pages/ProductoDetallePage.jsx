@@ -5,6 +5,12 @@ import { useCart } from '../context/CartContext'
 import { imagenFallback } from '../utils/imagenes'
 import Toast from '../components/Toast'
 
+// Debe coincidir con el breakpoint real que desactiva el layout de zoom
+// en producto-detalle.css:816 (`@media (max-width: 768px)`). Si cambia
+// uno, hay que cambiar el otro — no hay forma de leer el CSS desde JS
+// sin herramientas adicionales, así que esto es documentación ejecutable.
+const BREAKPOINT_ZOOM_DESACTIVADO_PX = 768
+
 /** Tallas US mostradas siempre en el selector, igual que producto-detalle.js original. */
 const TALLAS_US = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12, 13, 14]
 
@@ -122,7 +128,7 @@ export default function ProductoDetallePage() {
   }
 
   function alternarZoom(e) {
-    if (window.innerWidth <= 768 || !galleryRef.current) return
+    if (window.innerWidth <= BREAKPOINT_ZOOM_DESACTIVADO_PX || !galleryRef.current) return
     if (zoomActivo) {
       setZoomActivo(false)
       setOrigenZoom('center center')
