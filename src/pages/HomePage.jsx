@@ -85,6 +85,7 @@ export default function HomePage() {
                 src={src}
                 alt={i === 0 ? '' : undefined}
                 style={{ opacity: i === 0 ? 1 : 0 }}
+                fetchPriority={i === 0 ? 'high' : 'low'}
               />
             ))}
           </div>

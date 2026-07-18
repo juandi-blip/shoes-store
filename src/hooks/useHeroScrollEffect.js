@@ -49,7 +49,7 @@ export function useHeroScrollEffect(wrapperRef, stackRef, contentRef) {
           scrub: 1,
         },
       })
-      tl.fromTo(stackRef.current, { scale: 1.25 }, { scale: 1, ease: 'power2.out', duration: 1 }, 0)
+      tl.fromTo(stackRef.current, { scale: 1.25 }, { scale: 1, ease: 'power2.out', duration: imgs.length - 1 }, 0)
       for (let i = 1; i < imgs.length; i++) {
         tl.to(imgs[i - 1], { opacity: 0, ease: 'none', duration: 1 }, i - 1)
         tl.to(imgs[i], { opacity: 1, ease: 'none', duration: 1 }, i - 1)

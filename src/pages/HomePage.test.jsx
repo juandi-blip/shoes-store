@@ -50,6 +50,11 @@ describe('HomePage — hero con scroll', () => {
     )
     expect(imgs[0]).toHaveAttribute('alt', '')
 
+    expect(imgs[0]).toHaveAttribute('fetchpriority', 'high')
+    for (let i = 1; i < imgs.length; i++) {
+      expect(imgs[i]).toHaveAttribute('fetchpriority', 'low')
+    }
+
     expect(document.querySelector('.hero-scroll__overlay')).toBeInTheDocument()
   })
 
