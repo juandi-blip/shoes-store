@@ -25,6 +25,9 @@ const SostenibilidadPage = lazy(() => import('./pages/nosotros/SostenibilidadPag
 const TiendasPage = lazy(() => import('./pages/TiendasPage'))
 const TrabajaConNosotrosPage = lazy(() => import('./pages/TrabajaConNosotrosPage'))
 const AppPage = lazy(() => import('./pages/AppPage'))
+const TerminosPage = lazy(() => import('./pages/legal/TerminosPage'))
+const PrivacidadPage = lazy(() => import('./pages/legal/PrivacidadPage'))
+const AvisoLegalPage = lazy(() => import('./pages/legal/AvisoLegalPage'))
 
 /**
  * Layout de la tienda (header + footer). Las páginas de login/registro/perfil
@@ -72,6 +75,9 @@ function App() {
                   <Route path="/tiendas" element={<TiendasPage />} />
                   <Route path="/trabaja-con-nosotros" element={<TrabajaConNosotrosPage />} />
                   <Route path="/app" element={<AppPage />} />
+                  <Route path="/legal/terminos" element={<TerminosPage />} />
+                  <Route path="/legal/privacidad" element={<PrivacidadPage />} />
+                  <Route path="/legal/aviso-legal" element={<AvisoLegalPage />} />
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/registro" element={<RegistroPage />} />
