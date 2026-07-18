@@ -20,12 +20,16 @@ function mockMatchMedia(prefiereMenosMovimiento) {
 
 function HeroDeTest() {
   const wrapperRef = useRef(null)
-  const imgRef = useRef(null)
+  const stackRef = useRef(null)
   const contentRef = useRef(null)
-  useHeroScrollEffect(wrapperRef, imgRef, contentRef)
+  useHeroScrollEffect(wrapperRef, stackRef, contentRef)
   return (
     <div ref={wrapperRef}>
-      <img ref={imgRef} alt="" />
+      <div ref={stackRef}>
+        <img alt="" data-testid="img-0" />
+        <img data-testid="img-1" />
+        <img data-testid="img-2" />
+      </div>
       <div ref={contentRef} data-testid="content" />
     </div>
   )
@@ -42,6 +46,14 @@ describe('useHeroScrollEffect', () => {
     mockMatchMedia(true)
     const { getByTestId } = render(<HeroDeTest />)
     expect(getByTestId('content')).toHaveClass('is-revealed')
+  })
+
+  it('con movimiento reducido deja solo la última imagen visible', () => {
+    mockMatchMedia(true)
+    const { getByTestId } = render(<HeroDeTest />)
+    expect(getByTestId('img-0')).toHaveStyle({ opacity: '0' })
+    expect(getByTestId('img-1')).toHaveStyle({ opacity: '0' })
+    expect(getByTestId('img-2')).toHaveStyle({ opacity: '1' })
   })
 
   it('no agrega is-revealed de inmediato con movimiento normal (la anima GSAP/scroll)', () => {
