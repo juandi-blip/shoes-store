@@ -1,10 +1,11 @@
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useProductos, filtrarYOrdenarProductos } from '../hooks/useProductos'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import ProductGrid from '../components/ProductGrid'
 import { assetUrl } from '../utils/assetUrl'
 import { useDocumentHead } from '../hooks/useDocumentHead'
+import { useHeroScrollEffect } from '../hooks/useHeroScrollEffect'
 
 const SIN_FILTROS = { generos: [], categorias: [], precioMax: 100000, soloOutlet: false, soloNovedad: false }
 
@@ -26,6 +27,9 @@ const CATEGORIAS = [
   { titulo: 'MUJER', genero: 'mujer', bg: 'https://images.pexels.com/photos/27008326/pexels-photo-27008326.jpeg' },
   { titulo: 'NIÑOS', genero: 'ninos', bg: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=800' },
 ]
+
+/** Imagen del sneaker protagonista del hero con efecto de scroll. */
+const HERO_SNEAKER_IMG = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600'
 
 /**
  * Página de inicio: hero, marcas, categorías, banners promocionales y las
@@ -57,28 +61,25 @@ export default function HomePage() {
   // Activa la aparición al hacer scroll una vez que los productos están listos.
   useScrollReveal([destacados, novedades, outlet])
 
+  const heroWrapperRef = useRef(null)
+  const heroImgRef = useRef(null)
+  const heroContentRef = useRef(null)
+  useHeroScrollEffect(heroWrapperRef, heroImgRef, heroContentRef)
+
   return (
     <main>
       {/* ===== HERO ===== */}
-      <section className="hero homepage-hero" aria-label="Banner principal">
-        <div className="hero__image-wrap">
-          {/* Rendición SD directa (~1.9 MB) en vez del download UHD (~26 MB): mismo video, 93% menos peso */}
-          <video autoPlay muted loop playsInline className="hero__video">
-            <source src="https://videos.pexels.com/video-files/8520620/8520620-sd_960_394_25fps.mp4" type="video/mp4" />
-          </video>
-          <div className="hero__overlay"></div>
-        </div>
-        <div className="hero__content fade-in">
-          {/* Cada palabra se revela desde su máscara con retardo escalonado (glamour.css) */}
-          <h1 className="hero__title">
-            <span className="hero-word"><span>Eleva</span></span>{' '}
-            <span className="hero-word"><span>tu</span></span>{' '}
-            <span className="hero-word"><span>estilo</span></span>
-          </h1>
-          <p className="hero__subtitle">Las sneakers más exclusivas del momento. Rendimiento y diseño en cada paso.</p>
-          <div className="hero__actions">
-            <a href="#lo-mas-vendido" className="btn-primary">COMPRAR AHORA</a>
-            <a href="#categorias" className="btn-secondary">VER COLECCIÓN</a>
+      <section className="hero-scroll" ref={heroWrapperRef} aria-label="Banner principal">
+        <div className="hero-scroll__pin">
+          <img ref={heroImgRef} className="hero-scroll__img" src={HERO_SNEAKER_IMG} alt="" />
+          <div className="hero-scroll__overlay"></div>
+          <div className="hero__content hero-scroll__content" ref={heroContentRef}>
+            <h1 className="hero__title">Eleva tu estilo</h1>
+            <p className="hero__subtitle">Las sneakers más exclusivas del momento. Rendimiento y diseño en cada paso.</p>
+            <div className="hero__actions">
+              <a href="#lo-mas-vendido" className="btn-primary">COMPRAR AHORA</a>
+              <a href="#categorias" className="btn-secondary">VER COLECCIÓN</a>
+            </div>
           </div>
         </div>
       </section>
