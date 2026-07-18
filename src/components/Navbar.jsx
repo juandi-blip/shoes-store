@@ -3,7 +3,6 @@ import { useState, useRef, useEffect } from 'react'
 import { useSession } from '../context/SessionContext'
 import { useCart } from '../context/CartContext'
 import { MEGA_MENUS, NAV_MEGA } from './megaMenuData'
-import { assetUrl } from '../utils/assetUrl'
 
 const CLOSE_DELAY = 120 // ms, igual que js/tienda.js
 
@@ -205,7 +204,7 @@ export default function Navbar() {
             ))}
             {menu.promo && (
               <div className="mega-menu__promo">
-                <img src={assetUrl('megamenu-promo.png')} alt={menu.promo.title} loading="lazy" />
+                <img src={menu.promo.img} alt={menu.promo.title} loading="lazy" />
                 <h5 className="mega-menu__promo-title">{menu.promo.title}</h5>
                 <p className="mega-menu__promo-sub">{menu.promo.sub}</p>
                 <Link to={menu.promo.to} className="mega-menu__promo-btn" onClick={cerrarTodo}>VER MÁS</Link>

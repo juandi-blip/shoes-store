@@ -36,7 +36,12 @@ export const MEGA_MENUS = {
         ],
       },
     ],
-    promo: { title: 'Nueva Colección Mujer', sub: 'Primavera 2026', to: '/catalogo?genero=mujer&novedad=true' },
+    promo: {
+      title: 'Nueva Colección Mujer',
+      sub: 'Primavera 2026',
+      to: '/catalogo?genero=mujer&novedad=true',
+      img: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=800',
+    },
   },
   hombre: {
     pillars: [
@@ -70,7 +75,12 @@ export const MEGA_MENUS = {
         ],
       },
     ],
-    promo: { title: 'Lanzamiento Exclusivo', sub: 'Solo en Shoes Store', to: '/catalogo?genero=hombre&novedad=true' },
+    promo: {
+      title: 'Lanzamiento Exclusivo',
+      sub: 'Solo en Shoes Store',
+      to: '/catalogo?genero=hombre&novedad=true',
+      img: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=800',
+    },
   },
   ninos: {
     pillars: [
@@ -97,7 +107,12 @@ export const MEGA_MENUS = {
         ],
       },
     ],
-    promo: { title: 'Back to School', sub: 'Colección Infantil', to: '/catalogo?genero=ninos' },
+    promo: {
+      title: 'Back to School',
+      sub: 'Colección Infantil',
+      to: '/catalogo?genero=ninos',
+      img: 'https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&q=80&w=800',
+    },
   },
   deporte: {
     sport: true,

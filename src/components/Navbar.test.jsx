@@ -65,3 +65,14 @@ describe('Navbar — mega-menú por teclado', () => {
     expect(link.closest('li')).not.toHaveClass('active')
   })
 })
+
+describe('Navbar — mega-menú promo', () => {
+  it('cada mega-menú con promo usa una imagen distinta según género', () => {
+    renderNavbar()
+    const imgMujer = screen.getByAltText('Nueva Colección Mujer')
+    const imgHombre = screen.getByAltText('Lanzamiento Exclusivo')
+    const imgNinos = screen.getByAltText('Back to School')
+    const srcs = [imgMujer.src, imgHombre.src, imgNinos.src]
+    expect(new Set(srcs).size).toBe(3)
+  })
+})
