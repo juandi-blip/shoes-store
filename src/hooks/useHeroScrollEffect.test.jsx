@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom'
 import { useRef } from 'react'
 import { useHeroScrollEffect } from './useHeroScrollEffect'
 
