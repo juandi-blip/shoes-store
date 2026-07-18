@@ -1303,13 +1303,18 @@ body.drawer-open {
   justify-content: center;
 }
 
+.hero-scroll__stack {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
 .hero-scroll__img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  will-change: transform;
 }
 
 .hero-scroll__overlay {

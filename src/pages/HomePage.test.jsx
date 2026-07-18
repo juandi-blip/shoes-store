@@ -33,14 +33,23 @@ function renderHomePage() {
 }
 
 describe('HomePage — hero con scroll', () => {
-  it('renderiza la imagen del sneaker con overlay y el bloque de contenido', () => {
+  it('renderiza las 5 imágenes del stack en orden, con overlay y bloque de contenido', () => {
     renderHomePage()
     const seccion = document.querySelector('.hero-scroll')
     expect(seccion).toBeInTheDocument()
-    expect(document.querySelector('.hero-scroll__img')).toHaveAttribute(
+
+    const imgs = document.querySelectorAll('.hero-scroll__stack .hero-scroll__img')
+    expect(imgs).toHaveLength(5)
+    expect(imgs[0]).toHaveAttribute(
       'src',
       'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600'
     )
+    expect(imgs[4]).toHaveAttribute(
+      'src',
+      'https://images.unsplash.com/photo-1543508282-6319a3e2621f?auto=format&fit=crop&q=80&w=1600'
+    )
+    expect(imgs[0]).toHaveAttribute('alt', '')
+
     expect(document.querySelector('.hero-scroll__overlay')).toBeInTheDocument()
   })
 

@@ -28,8 +28,14 @@ const CATEGORIAS = [
   { titulo: 'NIÑOS', genero: 'ninos', bg: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&q=80&w=800' },
 ]
 
-/** Imagen del sneaker protagonista del hero con efecto de scroll. */
-const HERO_SNEAKER_IMG = 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600'
+/** Secuencia de sneakers del hero (crossfade ligado al scroll). */
+const HERO_SNEAKER_IMGS = [
+  'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=1600',
+  'https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&q=80&w=1600',
+  'https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&q=80&w=1600',
+  'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=1600',
+  'https://images.unsplash.com/photo-1543508282-6319a3e2621f?auto=format&fit=crop&q=80&w=1600',
+]
 
 /**
  * Página de inicio: hero, marcas, categorías, banners promocionales y las
@@ -62,16 +68,26 @@ export default function HomePage() {
   useScrollReveal([destacados, novedades, outlet])
 
   const heroWrapperRef = useRef(null)
-  const heroImgRef = useRef(null)
+  const heroStackRef = useRef(null)
   const heroContentRef = useRef(null)
-  useHeroScrollEffect(heroWrapperRef, heroImgRef, heroContentRef)
+  useHeroScrollEffect(heroWrapperRef, heroStackRef, heroContentRef)
 
   return (
     <main>
       {/* ===== HERO ===== */}
       <section className="hero-scroll" ref={heroWrapperRef} aria-label="Banner principal">
         <div className="hero-scroll__pin">
-          <img ref={heroImgRef} className="hero-scroll__img" src={HERO_SNEAKER_IMG} alt="" />
+          <div className="hero-scroll__stack" ref={heroStackRef}>
+            {HERO_SNEAKER_IMGS.map((src, i) => (
+              <img
+                key={src}
+                className="hero-scroll__img"
+                src={src}
+                alt={i === 0 ? '' : undefined}
+                style={{ opacity: i === 0 ? 1 : 0 }}
+              />
+            ))}
+          </div>
           <div className="hero-scroll__overlay"></div>
           <div className="hero__content hero-scroll__content" ref={heroContentRef}>
             <h1 className="hero__title">Eleva tu estilo</h1>
