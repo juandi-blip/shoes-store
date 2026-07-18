@@ -15,21 +15,21 @@ const COLUMNAS = [
   {
     titulo: 'Ayuda',
     links: [
-      { label: 'Estado de Pedido', to: '#' },
-      { label: 'Envíos y Entregas', to: '#' },
-      { label: 'Devoluciones', to: '#' },
-      { label: 'Opciones de Pago', to: '#' },
-      { label: 'Contacto', to: '#' },
+      { label: 'Estado de Pedido', to: '/ayuda/estado-pedido' },
+      { label: 'Envíos y Entregas', to: '/ayuda/envios' },
+      { label: 'Devoluciones', to: '/ayuda/devoluciones' },
+      { label: 'Opciones de Pago', to: '/ayuda/pago' },
+      { label: 'Contacto', to: '/contacto' },
     ],
   },
   {
     titulo: 'Shoes Store',
     links: [
-      { label: 'Nuestra Historia', to: '#' },
-      { label: 'Sostenibilidad', to: '#' },
-      { label: 'Tiendas Físicas', to: '#' },
-      { label: 'Trabaja con Nosotros', to: '#' },
-      { label: 'Shoes Store App', to: '#' },
+      { label: 'Nuestra Historia', to: '/nosotros/historia' },
+      { label: 'Sostenibilidad', to: '/nosotros/sostenibilidad' },
+      { label: 'Tiendas Físicas', to: '/tiendas' },
+      { label: 'Trabaja con Nosotros', to: '/trabaja-con-nosotros' },
+      { label: 'Shoes Store App', to: '/app' },
     ],
   },
 ]
@@ -83,9 +83,9 @@ export default function Footer() {
           <div className="footer-legal">
             <span className="footer-copy">© 2026 Shoes Store. Todos los derechos reservados.</span>
             <ul className="legal-links">
-              <li><a href="#">Términos de Uso</a></li>
-              <li><a href="#">Política de Privacidad</a></li>
-              <li><a href="#">Aviso Legal</a></li>
+              <li><Link to="/legal/terminos">Términos de Uso</Link></li>
+              <li><Link to="/legal/privacidad">Política de Privacidad</Link></li>
+              <li><Link to="/legal/aviso-legal">Aviso Legal</Link></li>
             </ul>
           </div>
         </div>
