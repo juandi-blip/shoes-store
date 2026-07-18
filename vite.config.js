@@ -11,5 +11,6 @@ export default defineConfig(({ command }) => ({
   test: {
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['./vitest.setup.js'],
   },
 }))
