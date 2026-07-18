@@ -19,6 +19,7 @@ const EstadoPedidoPage = lazy(() => import('./pages/ayuda/EstadoPedidoPage'))
 const EnviosPage = lazy(() => import('./pages/ayuda/EnviosPage'))
 const DevolucionesPage = lazy(() => import('./pages/ayuda/DevolucionesPage'))
 const OpcionesPagoPage = lazy(() => import('./pages/ayuda/OpcionesPagoPage'))
+const ContactoPage = lazy(() => import('./pages/ContactoPage'))
 
 /**
  * Layout de la tienda (header + footer). Las páginas de login/registro/perfil
@@ -60,6 +61,7 @@ function App() {
                   <Route path="/ayuda/envios" element={<EnviosPage />} />
                   <Route path="/ayuda/devoluciones" element={<DevolucionesPage />} />
                   <Route path="/ayuda/pago" element={<OpcionesPagoPage />} />
+                  <Route path="/contacto" element={<ContactoPage />} />
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/registro" element={<RegistroPage />} />
